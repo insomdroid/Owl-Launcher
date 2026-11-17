@@ -7,6 +7,7 @@ package com.android.launcher3.owl
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.View
 import java.util.Calendar
@@ -20,6 +21,7 @@ class OwlDotClockView @JvmOverloads constructor(
     private val litPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
     private val unlitPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
     private var text = ""
+    private val dotoTypeface: Typeface? by lazy { OwlFonts.doto(context) }
     private var palette = OwlTokens.DARK
 
     private val tick = Runnable {
@@ -75,6 +77,23 @@ class OwlDotClockView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         if (text.isEmpty() || width == 0 || height == 0) return
+
+        val doto = dotoTypeface
+        if (doto != null) {
+            // Doto (ROND 100) gives round dots directly; size the text to the view height.
+            val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                typeface = doto
+                color = litPaint.color
+                textAlign = Paint.Align.CENTER
+            }
+            paint.textSize = height * 0.9f
+            val maxWidth = width * 0.95f
+            val measured = paint.measureText(text)
+            if (measured > maxWidth) paint.textSize *= maxWidth / measured
+            val baseline = height / 2f - (paint.descent() + paint.ascent()) / 2f
+            canvas.drawText(text, width / 2f, baseline, paint)
+            return
+        }
 
         val glyphs = text.map { DotFont.glyph(it) }
         val gap = 1

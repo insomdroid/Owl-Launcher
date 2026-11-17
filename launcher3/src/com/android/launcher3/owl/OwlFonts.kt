@@ -10,7 +10,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.android.launcher3.R
 
 object OwlFonts {
-    fun doto(context: Context): Typeface? = load(context, R.font.owl_doto_regular)
+    fun doto(context: Context): Typeface? = load(context, R.font.owl_doto_rond)
     fun geist(context: Context): Typeface? = load(context, R.font.owl_geist_regular)
     fun geistMedium(context: Context): Typeface? = load(context, R.font.owl_geist_medium)
     fun geistSemiBold(context: Context): Typeface? = load(context, R.font.owl_geist_semibold)
