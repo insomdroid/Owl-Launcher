@@ -250,7 +250,6 @@ constructor(@ApplicationContext private val encryptedContext: Context) {
         val ENABLE_TWOLINE_ALLAPPS_TOGGLE = backedUpItem("pref_enable_two_line_toggle", false)
         @JvmField val WORKSPACE_LOCK = backedUpItem("pref_workspace_lock", false)
         @JvmField val ALLAPPS_THEMED_ICONS = backedUpItem("pref_allapps_themed_icons", true)
-        @JvmField val OWL_THEME_MODE = backedUpItem("pref_owl_theme_mode", "system")
         @JvmField val OWL_ICON_PACK = backedUpItem("pref_owl_icon_pack", "")
         @JvmField val DRAWER_OPEN_KEYBOARD = backedUpItem("pref_drawer_open_keyboard", false)
         @JvmField val SHOW_DESKTOP_LABELS = backedUpItem("pref_desktop_show_labels", true)

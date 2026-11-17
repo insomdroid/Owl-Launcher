@@ -18,14 +18,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:launcher="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory android:title="@string/owl_group_theme">
 
-    <com.android.launcher3.owl.OwlThemePreference
-            android:key="pref_owl_theme_mode"
-            android:title="@string/owl_theme_title" />
-    <com.android.launcher3.owl.OwlIconPackPreference
+    <com.android.launcher3.owl.OwlIconPackCategory
         android:key="pref_owl_icon_pack"
         android:title="@string/owl_icon_pack_title" />
+    <PreferenceCategory android:title="@string/owl_group_icons">
 
     <SwitchPreferenceCompat
             android:key="pref_allapps_themed_icons"
