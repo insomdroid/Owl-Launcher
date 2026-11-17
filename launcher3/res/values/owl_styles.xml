@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Settings screen in Owl style: flat background, hairlines, monochrome controls. -->
-    <style name="Owl.Settings.Theme" parent="@android:style/Theme.DeviceDefault.Settings">
+    <style name="Owl.Settings.Theme" parent="HomeSettings.Theme">
         <item name="android:windowBackground">@color/owl_bg</item>
         <item name="android:statusBarColor">@color/owl_bg</item>
         <item name="android:navigationBarColor">@color/owl_bg</item>
