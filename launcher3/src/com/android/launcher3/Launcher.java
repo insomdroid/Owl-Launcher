@@ -1209,6 +1209,11 @@ public class Launcher extends StatefulActivity<LauncherState>
     protected void onResume() {
         TraceHelper.INSTANCE.beginSection(ON_RESUME_EVT);
         super.onResume();
+        View owlIndicator = findViewById(R.id.page_indicator_container);
+        if (owlIndicator != null) {
+            owlIndicator.setVisibility(LauncherPrefs.OWL_SHOW_PAGE_INDICATOR.get(this)
+                    ? View.VISIBLE : View.INVISIBLE);
+        }
         if (com.android.launcher3.owl.OwlAppearance.INSTANCE.consumeDirty(this)) {
             com.android.launcher3.LauncherAppState.getInstance(this).getModel().forceReload();
         }

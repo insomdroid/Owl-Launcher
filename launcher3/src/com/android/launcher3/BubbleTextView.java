@@ -461,6 +461,13 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver,
         if (color != 0) {
             setTextColor(color);
         }
+        if ("dock".equals(area)) {
+            mShouldShowLabel = com.android.launcher3.LauncherPrefs.OWL_DOCK_LABELS.get(c);
+        } else if ("home".equals(area) && mDisplay == DISPLAY_WORKSPACE
+                && com.android.launcher3.LauncherPrefs.OWL_HOME_TWO_LINE.get(c)) {
+            setSingleLine(false);
+            setMaxLines(2);
+        }
     }
 
     public void applyFromWorkspaceItem(WorkspaceItemInfo info) {

@@ -276,6 +276,9 @@ constructor(@ApplicationContext private val encryptedContext: Context) {
         @JvmField val OWL_LABEL_COLOR_DRAWER = backedUpItem("owl_label_color_drawer", "automatic")
         @JvmField val OWL_APPEARANCE_DIRTY = backedUpItem("owl_appearance_dirty", false)
         @JvmField val OWL_DRAWER_SHOW_SEARCH = backedUpItem("owl_drawer_show_search", true)
+        @JvmField val OWL_SHOW_PAGE_INDICATOR = backedUpItem("owl_show_page_indicator", true)
+        @JvmField val OWL_HOME_TWO_LINE = backedUpItem("owl_home_two_line", false)
+        @JvmField val OWL_DOCK_LABELS = backedUpItem("owl_dock_labels", false)
         @JvmField
         val PROMISE_ICON_IDS = nonRestorableItem(InstallSessionHelper.PROMISE_ICON_IDS, "")
         @JvmField val WORK_EDU_STEP = backedUpItem("showed_work_profile_edu", 0)
