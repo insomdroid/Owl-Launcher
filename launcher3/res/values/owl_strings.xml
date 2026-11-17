@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="owl_theme_title">Owl theme</string>
+    <string name="owl_icon_pack_title">Icon pack</string>
+    <string name="owl_group_theme">Theme</string>
+    <string name="owl_group_home_screen">Home screen</string>
+    <string name="owl_group_app_drawer">App drawer</string>
+    <string name="owl_group_gestures_and_more">Gestures and more</string>
 </resources>

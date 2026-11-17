@@ -18,100 +18,106 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:launcher="http://schemas.android.com/apk/res-auto">
 
-    <SwitchPreferenceCompat
-        android:defaultValue="false"
-        android:key="pref_workspace_lock"
-        android:persistent="true"
-        android:title="@string/settings_lock_layout_title"
-        android:summaryOn="@string/settings_lock_layout_summary_on"
-        android:summaryOff="@string/settings_lock_layout_summary_off" />
+    <PreferenceCategory android:title="@string/owl_group_theme">
 
     <com.android.launcher3.owl.OwlThemePreference
-        android:key="pref_owl_theme_mode"
-        android:title="@string/owl_theme_title" />
+            android:key="pref_owl_theme_mode"
+            android:title="@string/owl_theme_title" />
+    <com.android.launcher3.owl.OwlIconPackPreference
+        android:key="pref_owl_icon_pack"
+        android:title="@string/owl_icon_pack_title" />
 
     <SwitchPreferenceCompat
-        android:defaultValue="false"
-        android:key="pref_sleep_gesture"
-        android:persistent="true"
-        android:title="@string/pref_sleep_gesture_title"
-        android:summary="@string/pref_sleep_gesture_summary" />
+            android:key="pref_allapps_themed_icons"
+            android:title="@string/pref_themed_icons_title"
+            android:summary="@string/pref_themed_icons_summary"
+            android:defaultValue="false"
+            android:persistent="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/owl_group_home_screen">
+
+    <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="pref_workspace_lock"
+            android:persistent="true"
+            android:title="@string/settings_lock_layout_title"
+            android:summaryOn="@string/settings_lock_layout_summary_on"
+            android:summaryOff="@string/settings_lock_layout_summary_off" />
+
+    <SwitchPreferenceCompat
+            android:key="pref_add_icon_to_home"
+            android:title="@string/auto_add_shortcuts_label"
+            android:summary="@string/auto_add_shortcuts_description"
+            android:defaultValue="true"
+            android:persistent="true"
+            launcher:logIdOn="613"
+            launcher:logIdOff="614" />
+
+    <SwitchPreferenceCompat
+            android:key="pref_desktop_show_labels"
+            android:title="@string/desktop_show_labels"
+            android:defaultValue="true"
+            android:persistent="true" />
 
     <com.android.launcher3.settings.NotificationDotsPreference
-        android:key="pref_icon_badging"
-        android:title="@string/notification_dots_title"
-        android:persistent="false"
-        android:widgetLayout="@layout/notification_pref_warning" />
-
-    <!--
-      LAUNCHER_ADD_NEW_APPS_TO_HOME_SCREEN_ENABLED(613)
-      LAUNCHER_ADD_NEW_APPS_TO_HOME_SCREEN_DISABLED(614)
-    -->
-    <SwitchPreferenceCompat
-        android:key="pref_add_icon_to_home"
-        android:title="@string/auto_add_shortcuts_label"
-        android:summary="@string/auto_add_shortcuts_description"
-        android:defaultValue="true"
-        android:persistent="true"
-        launcher:logIdOn="613"
-        launcher:logIdOff="614" />
-
-    <!--
-      LAUNCHER_HOME_SCREEN_ROTATION_ENABLED(615)
-      LAUNCHER_HOME_SCREEN_ROTATION_DISABLED(616)
-    -->
-    <SwitchPreferenceCompat
-        android:key="pref_allowRotation"
-        android:title="@string/allow_rotation_title"
-        android:summary="@string/allow_rotation_desc"
-        android:defaultValue="@bool/config_allowRotation"
-        android:persistent="true"
-        launcher:logIdOn="615"
-        launcher:logIdOff="616" />
+            android:key="pref_icon_badging"
+            android:title="@string/notification_dots_title"
+            android:persistent="false"
+            android:widgetLayout="@layout/notification_pref_warning" />
 
     <SwitchPreferenceCompat
-        android:defaultValue="true"
-        android:key="pref_enable_minus_one"
-        android:summary="@string/pref_show_google_now_summary"
-        android:title="@string/title_show_google_app" />
+            android:key="pref_allowRotation"
+            android:title="@string/allow_rotation_title"
+            android:summary="@string/allow_rotation_desc"
+            android:defaultValue="@bool/config_allowRotation"
+            android:persistent="true"
+            launcher:logIdOn="615"
+            launcher:logIdOff="616" />
+    </PreferenceCategory>
 
-    <Preference
-        android:key="pref_trust_apps"
-        android:title="@string/trust_apps_manager_name" />
+    <PreferenceCategory android:title="@string/owl_group_app_drawer">
+
+    <SwitchPreferenceCompat
+            android:key="pref_drawer_open_keyboard"
+            android:title="@string/drawer_open_keyboard_title"
+            android:summary="@string/drawer_open_keyboard_summary"
+            android:defaultValue="false"
+            android:persistent="true" />
+
+    <SwitchPreferenceCompat
+            android:key="pref_drawer_show_labels"
+            android:title="@string/drawer_show_labels"
+            android:defaultValue="true"
+            android:persistent="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/owl_group_gestures_and_more">
+
+    <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="pref_sleep_gesture"
+            android:persistent="true"
+            android:title="@string/pref_sleep_gesture_title"
+            android:summary="@string/pref_sleep_gesture_summary" />
+
+    <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="pref_enable_minus_one"
+            android:summary="@string/pref_show_google_now_summary"
+            android:title="@string/title_show_google_app" />
 
     <androidx.preference.PreferenceScreen
-        android:key="pref_suggestions"
-        android:title="@string/pref_suggestions_title"
-        android:summary="@string/pref_suggestions_summary"
-        android:persistent="false">
+            android:key="pref_suggestions"
+            android:title="@string/pref_suggestions_title"
+            android:summary="@string/pref_suggestions_summary"
+            android:persistent="false">
 
-        <intent android:action="android.settings.ACTION_CONTENT_SUGGESTIONS_SETTINGS" />
-    </androidx.preference.PreferenceScreen>
+            <intent android:action="android.settings.ACTION_CONTENT_SUGGESTIONS_SETTINGS" />
+        </androidx.preference.PreferenceScreen>
 
-    <SwitchPreferenceCompat
-        android:key="pref_drawer_open_keyboard"
-        android:title="@string/drawer_open_keyboard_title"
-        android:summary="@string/drawer_open_keyboard_summary"
-        android:defaultValue="false"
-        android:persistent="true" />
-
-    <SwitchPreferenceCompat
-        android:key="pref_allapps_themed_icons"
-        android:title="@string/pref_themed_icons_title"
-        android:summary="@string/pref_themed_icons_summary"
-        android:defaultValue="false"
-        android:persistent="true" />
-
-    <SwitchPreferenceCompat
-        android:key="pref_desktop_show_labels"
-        android:title="@string/desktop_show_labels"
-        android:defaultValue="true"
-        android:persistent="true" />
-
-    <SwitchPreferenceCompat
-        android:key="pref_drawer_show_labels"
-        android:title="@string/drawer_show_labels"
-        android:defaultValue="true"
-        android:persistent="true" />
-
+    <Preference
+            android:key="pref_trust_apps"
+            android:title="@string/trust_apps_manager_name" />
+    </PreferenceCategory>
 </androidx.preference.PreferenceScreen>

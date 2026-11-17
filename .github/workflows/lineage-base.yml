@@ -91,10 +91,6 @@ jobs:
           print("Merged manifest verified:", candidates[-1])
           print("Required package visibility, application class and components are present.")
           PY
-      - name: Build minified release size candidate
-        id: release_size
-        continue-on-error: true
-        run: gradle :app:assembleRelease --stacktrace --continue
       - name: Report APK sizes and SHA-256
         if: always()
         run: |
@@ -102,7 +98,7 @@ jobs:
           import hashlib
           from pathlib import Path
 
-          for variant in ("debug", "release"):
+          for variant in ("debug",):
               apk_dir = Path("app/build/outputs/apk") / variant
               apks = sorted(apk_dir.glob("*.apk")) if apk_dir.exists() else []
               if not apks:
@@ -118,9 +114,3 @@ jobs:
           name: launcher3-debug-apk
           path: launcher3/app/build/outputs/apk/debug/*.apk
           if-no-files-found: warn
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: launcher3-release-size-candidate
-          path: launcher3/app/build/outputs/apk/release/*.apk
-          if-no-files-found: ignore

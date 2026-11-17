@@ -3,7 +3,7 @@
 A minimal Android launcher built on Launcher3 (Trebuchet), with a calm visual style: monochrome, dots, and hairlines.
 
 - **Package:** `com.insomdroid.owl`
-- **Version:** 0.1.0 (first debug build)
+- **Version:** 0.1.1 (debug build, optimized: R8 and resource shrink, arm64 only)
 - **Support:** Android 12 (minSdk 31) to Android 16 (targetSdk 36)
 
 ## Origin

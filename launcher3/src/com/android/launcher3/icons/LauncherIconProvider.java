@@ -15,6 +15,8 @@
  */
 package com.android.launcher3.icons;
 
+import android.graphics.drawable.Drawable;
+import android.content.pm.ComponentInfo;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
@@ -62,6 +64,13 @@ public class LauncherIconProvider extends IconProvider {
     }
 
     @Override
+    public Drawable getIcon(ComponentInfo info, int iconDpi) {
+        Drawable fromPack = com.android.launcher3.owl.OwlIconPacks.INSTANCE.iconFor(
+                mContext, info.getComponentName(), iconDpi);
+        return fromPack != null ? fromPack : super.getIcon(info, iconDpi);
+    }
+
+    @Override
     protected ThemeData getThemeDataForPackage(String packageName) {
         return getThemedIconMap().get(packageName);
     }
@@ -69,7 +78,8 @@ public class LauncherIconProvider extends IconProvider {
     @Override
     public void updateSystemState() {
         super.updateSystemState();
-        mSystemState += "," + mThemeManager.getIconState().toUniqueId();
+        mSystemState += "," + mThemeManager.getIconState().toUniqueId()
+                + ",owl-pack:" + com.android.launcher3.owl.OwlIconPacks.INSTANCE.selected(mContext);
     }
 
     private Map<String, ThemeData> getThemedIconMap() {
