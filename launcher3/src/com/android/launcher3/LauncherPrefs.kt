@@ -258,6 +258,9 @@ constructor(@ApplicationContext private val encryptedContext: Context) {
         @JvmField val WALLPAPER_SCROLLING = backedUpItem("owl_wallpaper_scrolling", true)
         @JvmField val HIDE_STATUS_BAR = backedUpItem("owl_hide_status_bar", false)
         @JvmField val DRAWER_BG_OPACITY = backedUpItem("owl_drawer_bg_opacity", 100)
+        @JvmField val DOCK_ENABLED = backedUpItem("owl_dock_enabled", true)
+        @JvmField val DOCK_AUTO_HIDE = backedUpItem("owl_dock_auto_hide", false)
+        @JvmField val DOCK_BG_OPACITY = backedUpItem("owl_dock_bg_opacity", 0)
         @JvmField
         val PROMISE_ICON_IDS = nonRestorableItem(InstallSessionHelper.PROMISE_ICON_IDS, "")
         @JvmField val WORK_EDU_STEP = backedUpItem("showed_work_profile_edu", 0)

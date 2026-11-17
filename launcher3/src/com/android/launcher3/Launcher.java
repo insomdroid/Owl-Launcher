@@ -1209,6 +1209,10 @@ public class Launcher extends StatefulActivity<LauncherState>
     protected void onResume() {
         TraceHelper.INSTANCE.beginSection(ON_RESUME_EVT);
         super.onResume();
+        View owlDock = findViewById(R.id.hotseat);
+        if (owlDock instanceof Hotseat) {
+            ((Hotseat) owlDock).refreshOwlDockPrefs();
+        }
         if (LauncherPrefs.HIDE_STATUS_BAR.get(this)) {
             getWindow().getInsetsController().hide(android.view.WindowInsets.Type.statusBars());
         } else {

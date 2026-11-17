@@ -54,6 +54,29 @@
             android:persistent="true" />
 
     <SwitchPreferenceCompat
+            android:key="owl_dock_enabled"
+            android:title="Show dock"
+            android:summary="Show the dock at the bottom of the home screen"
+            android:defaultValue="true"
+            android:persistent="true" />
+
+    <SwitchPreferenceCompat
+            android:key="owl_dock_auto_hide"
+            android:title="Auto-hide dock"
+            android:summary="Hide the dock after 5 seconds without touch"
+            android:defaultValue="false"
+            android:persistent="true" />
+
+    <SeekBarPreference
+            android:key="owl_dock_bg_opacity"
+            android:title="Dock background opacity"
+            android:defaultValue="0"
+            android:max="100"
+            app:min="0"
+            app:showSeekBarValue="true"
+            android:persistent="true" />
+
+    <SwitchPreferenceCompat
             android:key="owl_hide_status_bar"
             android:title="Hide status bar"
             android:summary="Hide the status bar on the home screen"
