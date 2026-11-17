@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/owl_card"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="12dp">
+    <TextView
+        android:id="@+id/owl_weather_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/owl_doto_rond"
+        android:textColor="@color/owl_display"
+        android:textSize="40sp" />
+    <TextView
+        android:id="@+id/owl_weather_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/owl_geist_mono"
+        android:textAllCaps="true"
+        android:textColor="@color/owl_secondary"
+        android:textSize="10sp" />
+</LinearLayout>

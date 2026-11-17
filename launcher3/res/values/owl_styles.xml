@@ -14,7 +14,13 @@
         <item name="android:letterSpacing">0.12</item>
     </style>
 
+    <!-- Each settings row is a borderless glass card; rows are separated by a gap, not a line. -->
+    <style name="Owl_Preference" parent="Preference">
+        <item name="android:background">@drawable/owl_card</item>
+    </style>
+
     <style name="Owl.Settings.Theme" parent="HomeSettings.Theme">
+        <item name="preferenceStyle">@style/Owl_Preference</item>
         <item name="switchStyle">@style/Owl_Switch</item>
         <item name="preferenceCategoryTitleTextAppearance">@style/Owl_TextAppearance_Category</item>
         <item name="android:windowBackground">@color/owl_bg</item>
@@ -24,8 +30,8 @@
         <item name="android:textColorSecondary">@color/owl_secondary</item>
         <item name="android:colorAccent">@color/owl_display</item>
         <item name="android:colorControlActivated">@color/owl_display</item>
-        <item name="android:divider">@drawable/owl_hairline</item>
-        <item name="android:listDivider">@drawable/owl_hairline</item>
+        <item name="android:divider">@drawable/owl_gap</item>
+        <item name="android:listDivider">@drawable/owl_gap</item>
         <item name="android:colorControlNormal">@color/owl_muted</item>
         <item name="android:dialogCornerRadius">8dp</item>
         <item name="android:listPreferredItemPaddingStart">24dp</item>

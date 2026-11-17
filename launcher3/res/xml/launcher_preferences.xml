@@ -279,6 +279,13 @@
             android:persistent="true" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="Weather">
+        <Preference
+            android:key="owl_weather_location"
+            android:title="Allow location"
+            android:summary="Used by the weather widget. Weather data from Open-Meteo." />
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="Backup">
         <Preference
             android:key="owl_backup_export"

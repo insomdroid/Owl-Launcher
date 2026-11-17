@@ -22,6 +22,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.android.launcher3">
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
     <uses-permission android:name="android.permission.BIND_APPWIDGET" />
@@ -137,6 +139,15 @@
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/owl_clock_widget_info" />
+        </receiver>
+        <receiver android:name="com.android.launcher3.owl.widget.OwlWeatherWidget"
+            android:exported="false"
+            android:label="@string/owl_weather_widget_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/owl_weather_widget_info" />
         </receiver>
         <receiver android:name="com.android.launcher3.owl.widget.OwlMediaWidget"
             android:exported="false"

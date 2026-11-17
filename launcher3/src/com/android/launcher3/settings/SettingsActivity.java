@@ -103,6 +103,8 @@ public class SettingsActivity extends FragmentActivity
     private static final String KEY_BACKUP_IMPORT = "owl_backup_import";
     private static final int REQUEST_BACKUP_EXPORT = 4002;
     private static final int REQUEST_BACKUP_IMPORT = 4003;
+    private static final String KEY_WEATHER_LOCATION = "owl_weather_location";
+    private static final int REQUEST_WEATHER_LOCATION = 4004;
     private static final String SUGGESTIONS_PACKAGE = "com.google.android.as";
 
     @Override
@@ -352,11 +354,13 @@ public class SettingsActivity extends FragmentActivity
             super.onViewCreated(view, savedInstanceState);
             View listView = getListView();
             final int bottomPadding = listView.getPaddingBottom();
+            // Owl: rows are cards, so keep a gutter on both sides of the list.
+            final int gutter = Math.round(12 * getResources().getDisplayMetrics().density);
             listView.setOnApplyWindowInsetsListener((v, insets) -> {
                 v.setPadding(
-                        v.getPaddingLeft(),
+                        gutter,
                         v.getPaddingTop(),
-                        v.getPaddingRight(),
+                        gutter,
                         bottomPadding + insets.getSystemWindowInsetBottom());
                 return insets.consumeSystemWindowInsets();
             });
@@ -453,6 +457,14 @@ public class SettingsActivity extends FragmentActivity
                         create.addCategory(Intent.CATEGORY_OPENABLE);
                         create.putExtra(Intent.EXTRA_TITLE, "owl-launcher-settings.json");
                         startActivityForResult(create, REQUEST_BACKUP_EXPORT);
+                        return true;
+                    });
+                    return true;
+                case KEY_WEATHER_LOCATION:
+                    preference.setOnPreferenceClickListener(p -> {
+                        requestPermissions(
+                                new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                                REQUEST_WEATHER_LOCATION);
                         return true;
                     });
                     return true;
