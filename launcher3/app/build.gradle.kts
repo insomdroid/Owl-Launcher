@@ -9,11 +9,11 @@ val sysuiLibs = listOf("animationlib", "contextualeducationlib", "iconloaderlib"
 
 android {
     namespace = "com.android.launcher3"
-    compileSdk = 36
+    compileSdk = 37
     defaultConfig {
         applicationId = "com.insomdroid.owl"
         minSdk = 30
-        targetSdk = 35
+        targetSdk = 37
         versionCode = 1
         versionName = "0.1.0"
     }
