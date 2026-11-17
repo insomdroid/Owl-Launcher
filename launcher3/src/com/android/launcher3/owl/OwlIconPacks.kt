@@ -106,7 +106,7 @@ object OwlIconPacks {
                 event = parser.next()
             }
         } finally {
-            parser.close()
+            if (xmlId != 0) (parser as? AutoCloseable)?.close()
         }
         return map
     }
