@@ -163,6 +163,18 @@ public class SettingsActivity extends FragmentActivity
     @Override
     public boolean onPreferenceStartFragment(
             PreferenceFragmentCompat preferenceFragment, Preference pref) {
+        if (pref.getFragment() != null
+                && pref.getFragment().startsWith("com.android.launcher3.owl.")) {
+            // Owl pages open in place (same screen, with back navigation).
+            FragmentManager fm = getSupportFragmentManager();
+            Fragment f = fm.getFragmentFactory().instantiate(getClassLoader(), pref.getFragment());
+            f.setArguments(pref.getExtras());
+            fm.beginTransaction()
+                    .replace(R.id.content_frame, f)
+                    .addToBackStack(null)
+                    .commit();
+            return true;
+        }
         return startPreference(pref.getFragment(), pref.getExtras(), pref.getKey());
     }
 
