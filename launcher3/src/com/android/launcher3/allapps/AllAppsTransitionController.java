@@ -427,7 +427,7 @@ public class AllAppsTransitionController
         int visibleElements = state.getVisibleElements(mLauncher.getLauncherUiState());
         boolean hasAllAppsContent = (visibleElements & ALL_APPS_CONTENT) != 0;
 
-        Interpolator allAppsFade = config.getInterpolator(ANIM_ALL_APPS_FADE, LINEAR);
+        Interpolator allAppsFade = config.getInterpolator(ANIM_ALL_APPS_FADE, new android.view.animation.AccelerateDecelerateInterpolator());
         setter.setFloat(getAppsViewProgressAlpha(), MultiPropertyFactory.MULTI_PROPERTY_VALUE,
                 hasAllAppsContent ? 1 : 0, allAppsFade);
         setter.setFloat(getAppsViewPullbackAlpha(), MultiPropertyFactory.MULTI_PROPERTY_VALUE,

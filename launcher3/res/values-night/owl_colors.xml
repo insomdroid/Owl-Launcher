@@ -9,4 +9,6 @@
     <color name="owl_display">#FFFFFF</color>
     <color name="owl_accent">#D71921</color>
     <color name="owl_raised">#171717</color>
+    <color name="owl_muted">#5A5A5A</color>
+    <color name="owl_card">#1AFFFFFF</color>
 </resources>
