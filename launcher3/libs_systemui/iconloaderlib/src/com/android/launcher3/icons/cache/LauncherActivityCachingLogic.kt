@@ -55,6 +55,10 @@ object LauncherActivityCachingLogic : CachingLogic<LauncherActivityInfo> {
                     )
                     .setSourceHint(getSourceHint(info, cache))
             val iconDrawable = cache.iconProvider.getIcon(info.activityInfo, li.fullResIconDpi)
+            if (iconDrawable is com.android.launcher3.icons.OwlPackDrawable) {
+                // Owl: pack and unthemed icons are drawn as-is, without the adaptive wrapper.
+                iconOptions.setWrapNonAdaptiveIcon(false)
+            }
             if (context.packageManager.isDefaultApplicationIcon(iconDrawable)) {
                 Log.w(
                     TAG,

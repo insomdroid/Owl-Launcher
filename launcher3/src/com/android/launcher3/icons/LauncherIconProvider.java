@@ -67,7 +67,7 @@ public class LauncherIconProvider extends IconProvider {
     public Drawable getIcon(ComponentInfo info, int iconDpi) {
         Drawable fromPack = com.android.launcher3.owl.OwlIconPacks.INSTANCE.iconFor(
                 mContext, new android.content.ComponentName(info.packageName, info.name), iconDpi);
-        if (fromPack != null) return fromPack;
+        if (fromPack != null) return new com.android.launcher3.icons.OwlPackDrawable(fromPack);
         android.content.ComponentName cn =
                 new android.content.ComponentName(info.packageName, info.name);
         String mode = com.android.launcher3.owl.OwlIconPacks.INSTANCE.unthemedMode(mContext);
@@ -80,7 +80,7 @@ public class LauncherIconProvider extends IconProvider {
                     matrix.setSaturation(0f);
                     raw.setColorFilter(new android.graphics.ColorMatrixColorFilter(matrix));
                 }
-                return raw;
+                return new com.android.launcher3.icons.OwlPackDrawable(raw);
             } catch (android.content.pm.PackageManager.NameNotFoundException e) {
                 // Fall through to the default icon.
             }
