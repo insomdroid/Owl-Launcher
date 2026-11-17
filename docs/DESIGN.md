@@ -29,7 +29,7 @@ Sumber acuan: [vibe-nothing-ui-design](https://github.com/wangbh030722/vibe-noth
 | `warning` | `#F2C94C` | `#9C6B00` | `#F2C94C` |
 | `error` | `#FF5247` | `#D23B30` | `#FF5247` |
 
-Di Android: warna dark di `res/values-night/colors.xml`, light di `res/values/colors.xml`, dan AMOLED lewat tema tersendiri yang menimpa `surface` dan `raised`.
+Di Android: semua token ada di satu tempat, `launcher3/src/com/android/launcher3/owl/OwlTheme.kt` (`OwlTokens`), dengan mode `SYSTEM`, `LIGHT`, `DARK`, dan `AMOLED`. Font ada di `launcher3/res/font/`, dan helpernya di `OwlFonts.kt`.
 
 ## Aturan keras
 
