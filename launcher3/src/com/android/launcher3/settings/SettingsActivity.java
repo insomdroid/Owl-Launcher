@@ -324,6 +324,10 @@ public class SettingsActivity extends FragmentActivity
         protected boolean initPreference(Preference preference) {
             DisplayController.Info info = DisplayController.INSTANCE.get(getContext()).getInfo();
             LauncherApps launcherApps = getContext().getSystemService(LauncherApps.class);
+            if (preference.getKey() == null) {
+                // Categories and other key-less rows are always shown.
+                return true;
+            }
             switch (preference.getKey()) {
                 case NOTIFICATION_DOTS_PREFERENCE_KEY:
                     return BuildConfig.NOTIFICATION_DOTS_ENABLED;
