@@ -22,7 +22,7 @@ See [docs/DESIGN.md](docs/DESIGN.md). The visual reference is [vibe-nothing-ui-d
 
 - **Appearance:** follows the system light or dark setting. There is no separate theme option.
 - **Typography:** Doto (dot display), Geist (UI), Geist Mono (app labels). All fonts are SIL OFL 1.1, see `docs/fonts/OFL/`.
-- **Home screen:** sparse dot-grid background and a dot-matrix clock (HH:mm). The clock redraws once per minute and stops while not visible.
+- **Home screen:** no dot background. The wallpaper from the system shows through.
 - **Icons:** monochrome icons by default, with a transparent background and a black (light) or white (dark) glyph. Applies to home screen and All Apps.
 - **Icon packs:** Settings → Icons → Icon pack. Pick Default or an installed icon pack; the choice applies to home screen and All Apps immediately. Supports the common pack intents (Nova, Apex, ADW, GO).
 - **Widgets:**
@@ -56,7 +56,7 @@ Builds run only on manual trigger (`workflow_dispatch`), not on every push. A su
 |---|---|
 | Launcher3 base builds in CI | Verified (debug APK) |
 | Name, package ID, license | Done |
-| Dot-grid background and dot-matrix clock | Implemented, not yet verified on device |
+| Dot-grid background | Removed |
 | Monochrome icons on home and All Apps | Implemented, not yet verified on device |
 | Icon pack selection applies everywhere | Implemented, not yet verified on device |
 | Owl clock and media widgets | Implemented, not yet verified on device |
