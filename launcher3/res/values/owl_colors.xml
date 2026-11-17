@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Owl Launcher tokens, light. Dark values are in values-night/owl_colors.xml. -->
+<resources>
+    <color name="owl_bg">#F2F2F2</color>
+    <color name="owl_surface">#FFFFFF</color>
+    <color name="owl_line">#E2E2E2</color>
+    <color name="owl_secondary">#585A5A</color>
+    <color name="owl_primary">#1C1C1C</color>
+    <color name="owl_display">#000000</color>
+    <color name="owl_accent">#D71921</color>
+</resources>

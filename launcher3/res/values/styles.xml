@@ -586,6 +586,9 @@
 
     <style name="WidgetPickerActivityTheme" parent="@android:style/Theme.DeviceDefault.DayNight">
         <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:textColorPrimary">@color/owl_primary</item>
+        <item name="android:textColorSecondary">@color/owl_secondary</item>
+        <item name="android:colorAccent">@color/owl_display</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:colorBackgroundCacheHint">@null</item>

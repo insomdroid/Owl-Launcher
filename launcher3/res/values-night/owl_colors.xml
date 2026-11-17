@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Owl Launcher tokens, dark. -->
+<resources>
+    <color name="owl_bg">#000000</color>
+    <color name="owl_surface">#0C0C0C</color>
+    <color name="owl_line">#262626</color>
+    <color name="owl_secondary">#8C8C8C</color>
+    <color name="owl_primary">#EDEDED</color>
+    <color name="owl_display">#FFFFFF</color>
+    <color name="owl_accent">#D71921</color>
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Settings screen in Owl style: flat background, hairlines, monochrome controls. -->
+    <style name="Owl.Settings.Theme" parent="@android:style/Theme.DeviceDefault.Settings">
+        <item name="android:windowBackground">@color/owl_bg</item>
+        <item name="android:statusBarColor">@color/owl_bg</item>
+        <item name="android:navigationBarColor">@color/owl_bg</item>
+        <item name="android:textColorPrimary">@color/owl_primary</item>
+        <item name="android:textColorSecondary">@color/owl_secondary</item>
+        <item name="android:colorAccent">@color/owl_display</item>
+        <item name="android:colorControlActivated">@color/owl_display</item>
+        <item name="android:divider">@color/owl_line</item>
+        <item name="android:listPreferredItemPaddingStart">24dp</item>
+        <item name="android:listPreferredItemPaddingEnd">16dp</item>
+    </style>
+</resources>
