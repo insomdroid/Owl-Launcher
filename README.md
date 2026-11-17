@@ -4,7 +4,7 @@ Launcher Android minimalis berbasis Launcher3 (Trebuchet), dengan gaya visual ya
 
 - **Package:** `com.insomdroid.owl`
 - **Versi:** 0.1.0 (build pertama, debug)
-- **Target:** Android 11 (minSdk 30) sampai Android 17 (targetSdk 37)
+- **Target:** Android 12 (minSdk 31) sampai Android 17 (targetSdk 37)
 
 ## Asal proyek
 
