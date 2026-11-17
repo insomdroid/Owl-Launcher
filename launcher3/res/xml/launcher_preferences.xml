@@ -123,11 +123,6 @@
             android:persistent="true"
             android:title="@string/pref_sleep_gesture_title"
             android:summary="@string/pref_sleep_gesture_summary" />
-        <SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:key="pref_enable_minus_one"
-            android:summary="@string/pref_show_google_now_summary"
-            android:title="@string/title_show_google_app" />
         <Preference
             android:key="pref_trust_apps"
             android:title="@string/trust_apps_manager_name" />
