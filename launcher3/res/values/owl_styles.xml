@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Settings screen in Owl style: flat background, hairlines, monochrome controls. -->
+    <style name="Owl_Switch" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:thumb">@drawable/owl_switch_thumb</item>
+        <item name="track">@drawable/owl_switch_track</item>
+    </style>
+
     <style name="Owl_TextAppearance_Category">
         <item name="android:fontFamily">@font/owl_geist_mono</item>
         <item name="android:textAllCaps">true</item>
@@ -10,6 +15,7 @@
     </style>
 
     <style name="Owl.Settings.Theme" parent="HomeSettings.Theme">
+        <item name="switchStyle">@style/Owl_Switch</item>
         <item name="preferenceCategoryTitleTextAppearance">@style/Owl_TextAppearance_Category</item>
         <item name="android:windowBackground">@color/owl_bg</item>
         <item name="android:statusBarColor">@color/owl_bg</item>
