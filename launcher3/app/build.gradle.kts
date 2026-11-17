@@ -11,11 +11,11 @@ android {
     namespace = "com.android.launcher3"
     compileSdk = 36
     defaultConfig {
-        applicationId = "com.porting.launcher3"
+        applicationId = "com.insomdroid.owl"
         minSdk = 30
         targetSdk = 35
         versionCode = 1
-        versionName = "0.1"
+        versionName = "0.1.0"
     }
     buildTypes {
         debug {
