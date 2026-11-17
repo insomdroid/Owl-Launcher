@@ -82,11 +82,7 @@ object OwlIconPacks {
             val id = res.getIdentifier(drawableName, "drawable", pack)
             if (id == 0) return null
             val icon = res.getDrawableForDensity(id, dpi, null) ?: return null
-            if (data.iconBacks.isEmpty()) return icon
-            val backName = data.iconBacks[Math.floorMod(component.hashCode(), data.iconBacks.size)]
-            val backId = res.getIdentifier(backName, "drawable", pack)
-            val back = if (backId != 0) res.getDrawableForDensity(backId, dpi, null) else null
-            if (back == null) icon else android.graphics.drawable.LayerDrawable(arrayOf(back, icon))
+            icon
         } catch (e: Exception) {
             android.util.Log.w("OwlIconPacks", "Icon pack $pack failed for $component", e)
             null

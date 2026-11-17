@@ -44,7 +44,6 @@ class OwlDotGridView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         // Opaque Owl background, so the theme is visible regardless of the system wallpaper.
-        canvas.drawColor(bgColor)
         paint.color = dotColor
         var y = pitch / 2f
         while (y < height) {

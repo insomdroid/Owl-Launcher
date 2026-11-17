@@ -10,4 +10,6 @@
     <string name="owl_clock_widget_desc">Time in dot-matrix type. Minimal.</string>
     <string name="owl_media_widget_label">Media</string>
     <string name="owl_media_widget_desc">Previous, play or pause, and next for the app that is playing.</string>
+    <string name="owl_group_wallpaper">Wallpaper</string>
+    <string name="owl_group_dock">Dock</string>
 </resources>

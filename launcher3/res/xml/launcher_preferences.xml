@@ -19,55 +19,36 @@
     xmlns:launcher="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <PreferenceCategory android:title="@string/owl_group_icons">
-    <com.android.launcher3.owl.OwlIconPackRow
+        <com.android.launcher3.owl.OwlIconPackRow
             android:key="pref_owl_icon_pack"
             android:title="@string/owl_icon_pack_title"
             android:fragment="com.android.launcher3.owl.OwlIconPackFragment" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/owl_group_home_screen">
-
-    <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:key="pref_workspace_lock"
-            android:persistent="true"
-            android:title="@string/settings_lock_layout_title"
-            android:summaryOn="@string/settings_lock_layout_summary_on"
-            android:summaryOff="@string/settings_lock_layout_summary_off" />
-
-    <SwitchPreferenceCompat
-            android:key="pref_add_icon_to_home"
-            android:title="@string/auto_add_shortcuts_label"
-            android:summary="@string/auto_add_shortcuts_description"
-            android:defaultValue="true"
-            android:persistent="true"
-            launcher:logIdOn="613"
-            launcher:logIdOff="614" />
-
-    <SwitchPreferenceCompat
+    <PreferenceCategory android:title="@string/owl_group_wallpaper">
+        <SwitchPreferenceCompat
             android:key="owl_wallpaper_scrolling"
             android:title="Wallpaper scrolling"
             android:summary="Move the wallpaper with the home pages"
             android:defaultValue="true"
             android:persistent="true" />
+    </PreferenceCategory>
 
-    <SwitchPreferenceCompat
+    <PreferenceCategory android:title="@string/owl_group_dock">
+        <SwitchPreferenceCompat
             android:key="owl_dock_enabled"
             android:title="Show dock"
             android:summary="Show the dock at the bottom of the home screen"
             android:defaultValue="true"
             android:persistent="true" />
-
-    <SwitchPreferenceCompat
+        <SwitchPreferenceCompat
             android:key="owl_dock_auto_hide"
             android:title="Auto-hide dock"
             android:summary="Hide the dock after 5 seconds without touch"
             android:defaultValue="false"
             android:persistent="true" />
-
-    <SeekBarPreference
+        <SeekBarPreference
             android:key="owl_dock_bg_opacity"
             android:title="Dock background opacity"
             android:defaultValue="0"
@@ -75,27 +56,41 @@
             app:min="0"
             app:showSeekBarValue="true"
             android:persistent="true" />
+    </PreferenceCategory>
 
-    <SwitchPreferenceCompat
+    <PreferenceCategory android:title="@string/owl_group_home_screen">
+        <SwitchPreferenceCompat
             android:key="owl_hide_status_bar"
             android:title="Hide status bar"
             android:summary="Hide the status bar on the home screen"
             android:defaultValue="false"
             android:persistent="true" />
-
-    <SwitchPreferenceCompat
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="pref_workspace_lock"
+            android:persistent="true"
+            android:title="@string/settings_lock_layout_title"
+            android:summaryOn="@string/settings_lock_layout_summary_on"
+            android:summaryOff="@string/settings_lock_layout_summary_off" />
+        <SwitchPreferenceCompat
+            android:key="pref_add_icon_to_home"
+            android:title="@string/auto_add_shortcuts_label"
+            android:summary="@string/auto_add_shortcuts_description"
+            android:defaultValue="true"
+            android:persistent="true"
+            launcher:logIdOn="613"
+            launcher:logIdOff="614" />
+        <SwitchPreferenceCompat
             android:key="pref_desktop_show_labels"
             android:title="@string/desktop_show_labels"
             android:defaultValue="true"
             android:persistent="true" />
-
-    <com.android.launcher3.settings.NotificationDotsPreference
+        <com.android.launcher3.settings.NotificationDotsPreference
             android:key="pref_icon_badging"
             android:title="@string/notification_dots_title"
             android:persistent="false"
             android:widgetLayout="@layout/notification_pref_warning" />
-
-    <SwitchPreferenceCompat
+        <SwitchPreferenceCompat
             android:key="pref_allowRotation"
             android:title="@string/allow_rotation_title"
             android:summary="@string/allow_rotation_desc"
@@ -106,15 +101,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/owl_group_app_drawer">
-
-    <SwitchPreferenceCompat
-            android:key="pref_drawer_open_keyboard"
-            android:title="@string/drawer_open_keyboard_title"
-            android:summary="@string/drawer_open_keyboard_summary"
-            android:defaultValue="false"
-            android:persistent="true" />
-
-    <SeekBarPreference
+        <SeekBarPreference
             android:key="owl_drawer_bg_opacity"
             android:title="Drawer background opacity"
             android:defaultValue="100"
@@ -122,30 +109,32 @@
             app:min="0"
             app:showSeekBarValue="true"
             android:persistent="true" />
-
-    <SwitchPreferenceCompat
+        <SwitchPreferenceCompat
             android:key="pref_drawer_show_labels"
             android:title="@string/drawer_show_labels"
             android:defaultValue="true"
             android:persistent="true" />
+        <SwitchPreferenceCompat
+            android:key="pref_drawer_open_keyboard"
+            android:title="@string/drawer_open_keyboard_title"
+            android:summary="@string/drawer_open_keyboard_summary"
+            android:defaultValue="false"
+            android:persistent="true" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/owl_group_gestures_and_more">
-
-    <SwitchPreferenceCompat
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="pref_sleep_gesture"
             android:persistent="true"
             android:title="@string/pref_sleep_gesture_title"
             android:summary="@string/pref_sleep_gesture_summary" />
-
-    <SwitchPreferenceCompat
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="pref_enable_minus_one"
             android:summary="@string/pref_show_google_now_summary"
             android:title="@string/title_show_google_app" />
-
-    <Preference
+        <Preference
             android:key="pref_trust_apps"
             android:title="@string/trust_apps_manager_name" />
     </PreferenceCategory>
