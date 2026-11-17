@@ -1209,6 +1209,11 @@ public class Launcher extends StatefulActivity<LauncherState>
     protected void onResume() {
         TraceHelper.INSTANCE.beginSection(ON_RESUME_EVT);
         super.onResume();
+        if (LauncherPrefs.HIDE_STATUS_BAR.get(this)) {
+            getWindow().getInsetsController().hide(android.view.WindowInsets.Type.statusBars());
+        } else {
+            getWindow().getInsetsController().show(android.view.WindowInsets.Type.statusBars());
+        }
 
         if (mDeferOverlayCallbacks) {
             scheduleDeferredCheck();

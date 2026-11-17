@@ -482,6 +482,9 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
     }
 
     private float getWallpaperOffsetForPage(int page) {
+        if (!LauncherPrefs.WALLPAPER_SCROLLING.get(getContext())) {
+            return 0.5f;
+        }
         int pageScroll = getScrollForPage(page);
         return mWallpaperOffset.wallpaperOffsetForScroll(pageScroll);
     }

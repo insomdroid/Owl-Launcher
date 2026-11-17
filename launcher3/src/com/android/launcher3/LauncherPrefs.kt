@@ -255,6 +255,9 @@ constructor(@ApplicationContext private val encryptedContext: Context) {
         @JvmField val SHOW_DESKTOP_LABELS = backedUpItem("pref_desktop_show_labels", true)
         @JvmField val SHOW_DRAWER_LABELS = backedUpItem("pref_drawer_show_labels", true)
         @JvmField val SLEEP_GESTURE = backedUpItem("pref_sleep_gesture", false)
+        @JvmField val WALLPAPER_SCROLLING = backedUpItem("owl_wallpaper_scrolling", true)
+        @JvmField val HIDE_STATUS_BAR = backedUpItem("owl_hide_status_bar", false)
+        @JvmField val DRAWER_BG_OPACITY = backedUpItem("owl_drawer_bg_opacity", 100)
         @JvmField
         val PROMISE_ICON_IDS = nonRestorableItem(InstallSessionHelper.PROMISE_ICON_IDS, "")
         @JvmField val WORK_EDU_STEP = backedUpItem("showed_work_profile_edu", 0)
