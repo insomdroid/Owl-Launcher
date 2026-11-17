@@ -16,15 +16,19 @@ import org.xmlpull.v1.XmlPullParser
 
 object OwlIconPacks {
 
-    /** Stores the choice, drops cached icons, and reloads home and All Apps at once. */
+    /**
+     * Stores the choice, drops every cached icon, then restarts the launcher process so no
+     * in-memory icon state survives. The system starts the launcher again with the new pack.
+     */
     fun select(context: Context, pkg: String) {
         LauncherPrefs.get(context).put(LauncherPrefs.OWL_ICON_PACK to pkg)
         val app = LauncherAppState.getInstance(context)
         app.iconCache.invalidateAllIcons {
-            android.os.Handler(android.os.Looper.getMainLooper()).post { app.model.forceReload() }
+            android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                android.os.Process.killProcess(android.os.Process.myPid())
+            }, 400L)
         }
     }
-
 
     private val PACK_INTENTS = listOf(
         "org.adw.launcher.THEMES",
