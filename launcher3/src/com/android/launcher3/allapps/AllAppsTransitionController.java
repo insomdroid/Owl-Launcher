@@ -240,6 +240,7 @@ public class AllAppsTransitionController
         float shiftRange = fromBackground ? mLauncher.getDeviceProfile().getDeviceProperties().getHeightPx() : mShiftRange;
         getAppsViewProgressTranslationY().setValue(mProgress * shiftRange);
         mLauncher.onAllAppsTransition(1 - progress);
+        com.android.launcher3.owl.OwlDrawerAppearance.INSTANCE.applyBlur(mLauncher, 1 - progress);
 
         boolean hasScrim = progress < NAV_BAR_COLOR_FORCE_UPDATE_THRESHOLD
                 && mLauncher.getAppsView().getNavBarScrimHeight() > 0;

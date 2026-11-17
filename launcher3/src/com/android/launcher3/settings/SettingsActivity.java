@@ -96,6 +96,9 @@ public class SettingsActivity extends FragmentActivity
     public static final String KEY_TRUST_APPS = "pref_trust_apps";
 
     private static final String KEY_SUGGESTIONS = "pref_suggestions";
+    private static final String KEY_DRAWER_PICTURE = "owl_drawer_picture";
+    private static final String KEY_DRAWER_PICTURE_CLEAR = "owl_drawer_picture_clear";
+    private static final int REQUEST_DRAWER_PICTURE = 4001;
     private static final String SUGGESTIONS_PACKAGE = "com.google.android.as";
 
     @Override
@@ -220,6 +223,16 @@ public class SettingsActivity extends FragmentActivity
      */
     public static class LauncherSettingsFragment extends SettingsBasePreferenceFragment implements
             SettingsCache.OnChangeListener {
+
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            if (requestCode == REQUEST_DRAWER_PICTURE && resultCode == android.app.Activity.RESULT_OK
+                    && data != null && data.getData() != null) {
+                com.android.launcher3.owl.OwlDrawerAppearance.INSTANCE.importPicture(
+                        getActivity(), data.getData());
+            }
+        }
 
         protected boolean mDeveloperOptionsEnabled = false;
 
@@ -402,6 +415,21 @@ public class SettingsActivity extends FragmentActivity
                             Intent intent = new Intent(getActivity(), TrustAppsActivity.class);
                             startActivity(intent);
                         });
+                        return true;
+                    });
+                    return true;
+                case KEY_DRAWER_PICTURE:
+                    preference.setOnPreferenceClickListener(p -> {
+                        Intent pick = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                        pick.setType("image/*");
+                        pick.addCategory(Intent.CATEGORY_OPENABLE);
+                        startActivityForResult(pick, REQUEST_DRAWER_PICTURE);
+                        return true;
+                    });
+                    return true;
+                case KEY_DRAWER_PICTURE_CLEAR:
+                    preference.setOnPreferenceClickListener(p -> {
+                        com.android.launcher3.owl.OwlDrawerAppearance.INSTANCE.clearPicture(getActivity());
                         return true;
                     });
                     return true;

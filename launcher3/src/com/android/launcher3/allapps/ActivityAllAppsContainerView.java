@@ -1469,6 +1469,7 @@ public class ActivityAllAppsContainerView<T extends Context & ActivityContext>
     @Override
     public void drawOnScrimWithScaleAndBottomOffset(
             Canvas canvas, float scale, @Px int bottomOffsetPx) {
+        com.android.launcher3.owl.OwlDrawerAppearance.INSTANCE.drawPicture(canvas, getContext());
         final View panel = mBottomSheetBackground;
         final boolean hasBottomSheet = panel.getVisibility() == VISIBLE;
         final float translationY = ((View) panel.getParent()).getTranslationY();

@@ -224,6 +224,35 @@
             android:defaultValue="true"
             android:persistent="true" />
         <SwitchPreferenceCompat
+            android:key="owl_drawer_blur"
+            android:title="Blur wallpaper behind drawer"
+            android:summary="Blur the wallpaper while the app drawer is open (Android 12+)"
+            android:defaultValue="false"
+            android:persistent="true" />
+        <SeekBarPreference
+            android:key="owl_drawer_blur_strength"
+            android:title="Blur strength"
+            android:defaultValue="100"
+            android:max="200"
+            app:min="10"
+            app:showSeekBarValue="true"
+            android:persistent="true" />
+        <Preference
+            android:key="owl_drawer_picture"
+            android:title="Drawer picture"
+            android:summary="Choose an image behind the app drawer" />
+        <Preference
+            android:key="owl_drawer_picture_clear"
+            android:title="Remove drawer picture" />
+        <SeekBarPreference
+            android:key="owl_drawer_picture_dim"
+            android:title="Picture dim"
+            android:defaultValue="0"
+            android:max="100"
+            app:min="0"
+            app:showSeekBarValue="true"
+            android:persistent="true" />
+        <SwitchPreferenceCompat
             android:key="pref_drawer_show_labels"
             android:title="@string/drawer_show_labels"
             android:defaultValue="true"
