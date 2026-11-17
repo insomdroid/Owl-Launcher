@@ -1,0 +1,132 @@
+name: build-lineage-base
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, lineage-base, trebuchet-stable, nothing-port ]
+    paths:
+      - ".github/workflows/lineage-base.yml"
+      - "launcher3/**"
+      - "app/**"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: launcher3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Install Android SDK packages
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;36.0.0" "platform-tools"
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.10"
+      - run: gradle :app:assembleDebug --stacktrace --continue
+      - name: Verify merged Launcher3 manifest
+        run: |
+          python - <<'PY'
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+
+          candidates = sorted(
+              Path("app/build/intermediates/merged_manifest").rglob("AndroidManifest.xml")
+          )
+          if not candidates:
+              raise SystemExit("Merged debug manifest was not generated")
+
+          manifest = ET.parse(candidates[-1]).getroot()
+          android = "{http://schemas.android.com/apk/res/android}"
+          permissions = {
+              node.get(android + "name")
+              for node in manifest.findall("uses-permission")
+          }
+          assert "android.permission.QUERY_ALL_PACKAGES" in permissions, (
+              "QUERY_ALL_PACKAGES is missing; installed apps may be invisible"
+          )
+
+          application = manifest.find("application")
+          assert application is not None, "Application element is missing"
+          assert application.get(android + "name") == (
+              "com.android.launcher3.LauncherApplication"
+          ), "LauncherApplication is not registered"
+
+          components = {
+              node.get(android + "name")
+              for node in list(application)
+              if node.get(android + "name")
+          }
+
+          launcher = next(
+              node for node in list(application)
+              if node.get(android + "name") == "com.android.launcher3.Launcher"
+          )
+          launcher_filters = launcher.findall("intent-filter")
+          has_launcher_entry = any(
+              any(
+                  category.get(android + "name") == "android.intent.category.LAUNCHER"
+                  for category in intent_filter.findall("category")
+              )
+              and any(
+                  action.get(android + "name") == "android.intent.action.MAIN"
+                  for action in intent_filter.findall("action")
+              )
+              for intent_filter in launcher_filters
+          )
+          assert has_launcher_entry, (
+              "Launcher activity must expose MAIN + LAUNCHER so the app icon "
+              "appears in other launchers' app drawers"
+          )
+          required = {
+              "com.android.launcher3.Launcher",
+              "com.android.launcher3.settings.SettingsActivity",
+              "com.android.launcher3.widgetpicker.WidgetPickerActivity",
+              "com.android.launcher3.LauncherProvider",
+              "com.android.launcher3.SessionCommitReceiver",
+              "com.android.launcher3.AppWidgetsRestoredReceiver",
+              "com.android.launcher3.notification.NotificationListener",
+              "com.android.launcher3.dragndrop.AddItemActivity",
+          }
+          missing = sorted(required - components)
+          if missing:
+              raise SystemExit("Missing Launcher3 manifest components: " + ", ".join(missing))
+          print("Merged manifest verified:", candidates[-1])
+          print("Required package visibility, application class and components are present.")
+          PY
+      - name: Build minified release size candidate
+        id: release_size
+        continue-on-error: true
+        run: gradle :app:assembleRelease --stacktrace --continue
+      - name: Report APK sizes and SHA-256
+        if: always()
+        run: |
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+
+          for variant in ("debug", "release"):
+              apk_dir = Path("app/build/outputs/apk") / variant
+              apks = sorted(apk_dir.glob("*.apk")) if apk_dir.exists() else []
+              if not apks:
+                  print(f"{variant}: no APK generated")
+                  continue
+              for apk in apks:
+                  digest = hashlib.sha256(apk.read_bytes()).hexdigest()
+                  print(f"{variant}: {apk.stat().st_size} bytes SHA256={digest} PATH={apk}")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: launcher3-debug-apk
+          path: launcher3/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: launcher3-release-size-candidate
+          path: launcher3/app/build/outputs/apk/release/*.apk
+          if-no-files-found: ignore
