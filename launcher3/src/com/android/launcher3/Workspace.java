@@ -3524,7 +3524,10 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
      * Calls {@link #snapToPage(int)} on the {@link #DEFAULT_PAGE}, then requests focus on it.
      */
     public void moveToDefaultScreen() {
-        int page = DEFAULT_PAGE;
+        // Owl: the HOME button returns to the page chosen in settings.
+        int page = Math.min(
+                Math.max(0, com.android.launcher3.owl.OwlChoices.INSTANCE.homePage(getContext())),
+                Math.max(0, getChildCount() - 1));
         if (!workspaceInModalState() && getNextPage() != page) {
             snapToPage(page);
         }

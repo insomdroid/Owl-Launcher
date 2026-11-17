@@ -35,10 +35,14 @@ object OwlChoices {
             "#000000" to "Black",
             "#1C1C1C" to "Charcoal",
         ),
+        "owl_home_page" to (0..9).map { it.toString() to "Page ${it + 1}" },
         "owl_label_color_home" to LABEL_COLORS,
         "owl_label_color_dock" to LABEL_COLORS,
         "owl_label_color_drawer" to LABEL_COLORS,
     )
+
+    /** The page the HOME button returns to (0 = the leftmost page). */
+    fun homePage(context: Context): Int = current(context, "owl_home_page").toIntOrNull() ?: 0
 
     fun label(key: String, value: String): String =
         options[key]?.firstOrNull { it.first.equals(value, ignoreCase = true) }?.second ?: value
@@ -47,6 +51,7 @@ object OwlChoices {
         "owl_icon_shape" -> LauncherPrefs.get(context).get(LauncherPrefs.OWL_ICON_SHAPE)
         "owl_backplate_mode" -> LauncherPrefs.get(context).get(LauncherPrefs.OWL_BACKPLATE_MODE)
         "owl_backplate_color" -> LauncherPrefs.get(context).get(LauncherPrefs.OWL_BACKPLATE_COLOR)
+        "owl_home_page" -> LauncherPrefs.get(context).get(LauncherPrefs.OWL_HOME_PAGE)
         "owl_label_color_home" -> LauncherPrefs.get(context).get(LauncherPrefs.OWL_LABEL_COLOR_HOME)
         "owl_label_color_dock" -> LauncherPrefs.get(context).get(LauncherPrefs.OWL_LABEL_COLOR_DOCK)
         "owl_label_color_drawer" -> LauncherPrefs.get(context).get(LauncherPrefs.OWL_LABEL_COLOR_DRAWER)
@@ -59,6 +64,7 @@ object OwlChoices {
             "owl_icon_shape" -> prefs.put(LauncherPrefs.OWL_ICON_SHAPE to value)
             "owl_backplate_mode" -> prefs.put(LauncherPrefs.OWL_BACKPLATE_MODE to value)
             "owl_backplate_color" -> prefs.put(LauncherPrefs.OWL_BACKPLATE_COLOR to value)
+            "owl_home_page" -> prefs.put(LauncherPrefs.OWL_HOME_PAGE to value)
             "owl_label_color_home" -> prefs.put(LauncherPrefs.OWL_LABEL_COLOR_HOME to value)
             "owl_label_color_dock" -> prefs.put(LauncherPrefs.OWL_LABEL_COLOR_DOCK to value)
             "owl_label_color_drawer" -> prefs.put(LauncherPrefs.OWL_LABEL_COLOR_DRAWER to value)

@@ -133,6 +133,13 @@
             android:fragment="com.android.launcher3.owl.OwlChoiceFragment">
             <extra android:name="owl_pref" android:value="owl_label_color_home" />
         </com.android.launcher3.owl.OwlChoiceRow>
+        <com.android.launcher3.owl.OwlChoiceRow
+            android:key="owl_home_page"
+            android:title="Home page"
+            android:summary="The page the HOME button returns to"
+            android:fragment="com.android.launcher3.owl.OwlChoiceFragment">
+            <extra android:name="owl_pref" android:value="owl_home_page" />
+        </com.android.launcher3.owl.OwlChoiceRow>
         <SwitchPreferenceCompat
             android:key="owl_show_page_indicator"
             android:title="Page indicator"
