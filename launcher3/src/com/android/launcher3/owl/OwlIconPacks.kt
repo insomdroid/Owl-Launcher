@@ -22,6 +22,7 @@ object OwlIconPacks {
      */
     fun select(context: Context, pkg: String) {
         LauncherPrefs.get(context).put(LauncherPrefs.OWL_ICON_PACK to pkg)
+        clearCache()
         val app = LauncherAppState.getInstance(context)
         app.iconCache.invalidateAllIcons {
             android.os.Handler(android.os.Looper.getMainLooper()).post { app.model.forceReload() }
@@ -56,26 +57,55 @@ object OwlIconPacks {
     /** The package of the selected icon pack, or empty for none. */
     fun selected(context: Context): String = LauncherPrefs.get(context).get(LauncherPrefs.OWL_ICON_PACK)
 
-    /** Icon from the selected pack for [component], or null to use the default icon. */
+    /** Parsed appfilter for one pack: component to drawable name, plus iconback names. */
+    private class PackData(val mapping: Map<ComponentName, String>, val iconBacks: List<String>)
+
+    private val packCache = HashMap<String, PackData?>()
+
+    /** Drops parsed pack data so a changed pack is read again. */
+    @Synchronized
+    fun clearCache() = packCache.clear()
+
+    /**
+     * Icon from the selected pack for [component], or null to use the default icon.
+     * When the pack declares iconback artwork, the icon is placed on one of those backplates,
+     * the same way Nova and Nomina do it.
+     */
     fun iconFor(context: Context, component: ComponentName, dpi: Int): Drawable? {
         val pack = selected(context)
         if (pack.isEmpty()) return null
         return try {
+            val data = packData(context, pack) ?: return null
+            val drawableName = data.mapping[component] ?: return null
             val packContext = context.createPackageContext(pack, 0)
             val res = packContext.resources
-            val mapping = readAppFilter(packContext)
-            val drawableName = mapping[component] ?: return null
             val id = res.getIdentifier(drawableName, "drawable", pack)
-            if (id == 0) null else res.getDrawableForDensity(id, dpi, null)
+            if (id == 0) return null
+            val icon = res.getDrawableForDensity(id, dpi, null) ?: return null
+            if (data.iconBacks.isEmpty()) return icon
+            val backName = data.iconBacks[Math.floorMod(component.hashCode(), data.iconBacks.size)]
+            val backId = res.getIdentifier(backName, "drawable", pack)
+            val back = if (backId != 0) res.getDrawableForDensity(backId, dpi, null) else null
+            if (back == null) icon else android.graphics.drawable.LayerDrawable(arrayOf(back, icon))
         } catch (e: Exception) {
             android.util.Log.w("OwlIconPacks", "Icon pack $pack failed for $component", e)
             null
         }
     }
 
-    private fun readAppFilter(packContext: Context): Map<ComponentName, String> {
+    @Synchronized
+    private fun packData(context: Context, pack: String): PackData? {
+        if (packCache.containsKey(pack)) return packCache[pack]
+        val packContext = context.createPackageContext(pack, 0)
+        val data = readAppFilter(packContext)
+        packCache[pack] = data
+        return data
+    }
+
+    private fun readAppFilter(packContext: Context): PackData? {
         val res = packContext.resources
         val map = HashMap<ComponentName, String>()
+        val backs = LinkedHashSet<String>()
         val xmlId = res.getIdentifier("appfilter", "xml", packContext.packageName)
         val parser: XmlPullParser = if (xmlId != 0) {
             res.getXml(xmlId)
@@ -86,21 +116,32 @@ object OwlIconPacks {
                     assetParser.setInput(input, "utf-8")
                 }
             } catch (e: java.io.IOException) {
-                return emptyMap()
+                return null
             }
             assetParser
         }
         try {
             var event = parser.eventType
             while (event != XmlPullParser.END_DOCUMENT) {
-                if (event == XmlPullParser.START_TAG && parser.name == "item") {
-                    val component = parser.getAttributeValue(null, "component")
-                    val drawable = parser.getAttributeValue(null, "drawable")
-                    if (component != null && drawable != null) {
-                        // Format: ComponentInfo{package/class}
-                        val inner = component.removePrefix("ComponentInfo{").removeSuffix("}")
-                        val name: ComponentName? = ComponentName.unflattenFromString(inner)
-                        if (name != null) map[name] = drawable
+                if (event == XmlPullParser.START_TAG) {
+                    when (parser.name) {
+                        "item" -> {
+                            val component = parser.getAttributeValue(null, "component")
+                            val drawable = parser.getAttributeValue(null, "drawable")
+                            if (component != null && drawable != null) {
+                                // Format: ComponentInfo{package/class}
+                                val inner = component.removePrefix("ComponentInfo{").removeSuffix("}")
+                                val name: ComponentName? = ComponentName.unflattenFromString(inner)
+                                if (name != null && name !in map) map[name] = drawable
+                            }
+                        }
+                        "iconback" -> {
+                            for (index in 0 until parser.attributeCount) {
+                                if (parser.getAttributeName(index).startsWith("img")) {
+                                    parser.getAttributeValue(index)?.takeIf { it.isNotBlank() }?.let(backs::add)
+                                }
+                            }
+                        }
                     }
                 }
                 event = parser.next()
@@ -108,6 +149,6 @@ object OwlIconPacks {
         } finally {
             if (xmlId != 0) (parser as? AutoCloseable)?.close()
         }
-        return map
+        return PackData(map, backs.toList())
     }
 }
