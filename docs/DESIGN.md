@@ -98,3 +98,14 @@ Place a screen next to the web reference. If someone can't tell which one is the
 ## Fonts and licenses
 
 Licenses for the bundled fonts are in `docs/fonts/OFL/`.
+
+## Implementation status
+
+Done in code: tokens, Doto/Geist/Geist Mono fonts, dot-grid background, dot-matrix clock, monochrome transparent icons, icon pack selection page, settings and widget-picker colors, All Apps surface colors, uppercase mono app labels.
+
+Not yet done:
+- Doto ROND axis (needs a variable Doto font; only static weights are bundled).
+- Settings detail: hairline list rows, pill switches, and 8dp dialogs (only colors are applied).
+- Widget picker and widget cards: glass cards, label typography, layout.
+- Status icons (9x9 dot grid) and the 25x25 glyph matrix hero.
+- All Apps blur and bottom-sheet background (still uses Launcher3 blur path).

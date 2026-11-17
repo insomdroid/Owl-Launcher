@@ -273,6 +273,8 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver,
         android.graphics.Typeface owlMono = com.android.launcher3.owl.OwlFonts.INSTANCE.geistMono(context);
         if (owlMono != null) {
             setTypeface(owlMono);
+            // Owl labels: uppercase monospace, per the design guide.
+            setAllCaps(true);
         }
         mMinimizedStateDescription = getContext().getString(
                 R.string.app_minimized_state_description);
