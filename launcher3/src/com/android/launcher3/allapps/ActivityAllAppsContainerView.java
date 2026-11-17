@@ -288,6 +288,10 @@ public class ActivityAllAppsContainerView<T extends Context & ActivityContext>
             mSearchContainer.setFocusedByDefault(true);
         }
         mSearchUiManager = (SearchUiManager) mSearchContainer;
+        // Owl: the drawer search bar can be hidden from settings (Nomina: showDrawerSearch).
+        if (!com.android.launcher3.LauncherPrefs.OWL_DRAWER_SHOW_SEARCH.get(getContext())) {
+            mSearchContainer.setVisibility(GONE);
+        }
     }
 
     public List<AllAppsRow> getAdditionalHeaderRows() {

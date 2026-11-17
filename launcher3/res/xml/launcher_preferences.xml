@@ -200,6 +200,12 @@
             <extra android:name="owl_pref" android:value="owl_label_color_drawer" />
         </com.android.launcher3.owl.OwlChoiceRow>
         <SwitchPreferenceCompat
+            android:key="owl_drawer_show_search"
+            android:title="Show search bar"
+            android:summary="Show the search field at the top of the app drawer"
+            android:defaultValue="true"
+            android:persistent="true" />
+        <SwitchPreferenceCompat
             android:key="pref_drawer_show_labels"
             android:title="@string/drawer_show_labels"
             android:defaultValue="true"
