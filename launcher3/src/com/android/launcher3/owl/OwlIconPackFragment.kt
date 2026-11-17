@@ -7,8 +7,6 @@ package com.android.launcher3.owl
 import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import com.android.launcher3.LauncherAppState
-import com.android.launcher3.LauncherPrefs
 
 class OwlIconPackFragment : PreferenceFragmentCompat() {
 
@@ -37,8 +35,7 @@ class OwlIconPackFragment : PreferenceFragmentCompat() {
                 title = label
                 summary = if (pkg == selected) "Selected" else ""
                 setOnPreferenceClickListener {
-                    LauncherPrefs.get(ctx).put(LauncherPrefs.OWL_ICON_PACK to pkg)
-                    LauncherAppState.getInstance(ctx).model.forceReload()
+                    OwlIconPacks.select(ctx, pkg)
                     requireActivity().onBackPressedDispatcher.onBackPressed()
                     true
                 }

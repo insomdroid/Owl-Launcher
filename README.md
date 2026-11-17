@@ -12,7 +12,7 @@ The code base comes from the `trebuchet-stable` branch of `insomdroid/porting-no
 
 Changes in this repo:
 - App name and package ID changed to Owl Launcher.
-- Visual style added on top of Launcher3: theme modes, typography, dot-grid background, dot-matrix clock, and monochrome icons.
+- Visual style added on top of Launcher3: typography, dot-grid background, dot-matrix clock, monochrome icons, and two built-in widgets.
 
 ## Design
 
@@ -20,10 +20,15 @@ See [docs/DESIGN.md](docs/DESIGN.md). The visual reference is [vibe-nothing-ui-d
 
 ## Features
 
-- **Theme:** System, Light, Dark, or AMOLED (Settings → Owl theme; tap to cycle). Takes effect after the launcher is reopened.
+- **Appearance:** follows the system light or dark setting. There is no separate theme option.
 - **Typography:** Doto (dot display), Geist (UI), Geist Mono (app labels). All fonts are SIL OFL 1.1, see `docs/fonts/OFL/`.
 - **Home screen:** sparse dot-grid background and a dot-matrix clock (HH:mm). The clock redraws once per minute and stops while not visible.
-- **Icons:** monochrome themed icons by default in All Apps, with a transparent background and a black (Light) or white (Dark) glyph.
+- **Icons:** monochrome icons by default, with a transparent background and a black (light) or white (dark) glyph. Applies to home screen and All Apps.
+- **Icon packs:** Settings → Icons → Icon pack. Pick Default or an installed icon pack; the choice applies to home screen and All Apps immediately. Supports the common pack intents (Nova, Apex, ADW, GO).
+- **Widgets:**
+  - *Owl clock*: time in the dot-matrix face, updated once a minute.
+  - *Media*: previous, play or pause, and next for the app that is playing. Uses media key events, so no extra permission is needed.
+- **Settings:** grouped into Icons, Home screen, App drawer, and Gestures and more.
 - **Launcher icon:** Owl mark on black, with a monochrome layer for themed icons. Logos are in `docs/brand/`.
 
 ## License
@@ -51,10 +56,10 @@ Builds run only on manual trigger (`workflow_dispatch`), not on every push. A su
 |---|---|
 | Launcher3 base builds in CI | Verified (debug APK) |
 | Name, package ID, license | Done |
-| Theme modes (System, Light, Dark, AMOLED) | Implemented, not yet verified on device |
-| Geist Mono app labels | Implemented, not yet verified on device |
 | Dot-grid background and dot-matrix clock | Implemented, not yet verified on device |
-| Monochrome transparent icons in All Apps | Implemented, not yet verified on device |
-| Logo and launcher icon | Implemented, not yet verified on device |
-| Widget and All Apps styling | Not started |
+| Monochrome icons on home and All Apps | Implemented, not yet verified on device |
+| Icon pack selection applies everywhere | Implemented, not yet verified on device |
+| Owl clock and media widgets | Implemented, not yet verified on device |
+| Settings: suggestions and icon theme toggle removed | Done |
+| Widget card typography and All Apps background | Not started |
 | Android 17 (API 37) target | Waiting for platform 37 in CI |

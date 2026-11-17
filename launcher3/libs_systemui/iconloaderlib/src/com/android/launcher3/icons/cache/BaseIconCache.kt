@@ -167,6 +167,17 @@ constructor(
         )
     }
 
+    /** Drops every cached icon (memory and DB) so the next load re-resolves icons, then runs [onDone]. */
+    fun invalidateAllIcons(onDone: Runnable) = workerHandler.post {
+        synchronized(this) {
+            defaultIcon = null
+            userFlagOpMap.clear()
+            iconDb.clear()
+            cache.clear()
+        }
+        onDone.run()
+    }
+
     fun getUpdateHandler(): IconCacheUpdateHandler {
         updateSystemState()
         // Remove all active icon update tasks.

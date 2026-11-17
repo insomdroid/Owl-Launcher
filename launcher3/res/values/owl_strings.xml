@@ -6,4 +6,8 @@
     <string name="owl_group_home_screen">Home screen</string>
     <string name="owl_group_app_drawer">App drawer</string>
     <string name="owl_group_gestures_and_more">Gestures and more</string>
+    <string name="owl_clock_widget_label">Owl clock</string>
+    <string name="owl_clock_widget_desc">Time in dot-matrix type. Minimal.</string>
+    <string name="owl_media_widget_label">Media</string>
+    <string name="owl_media_widget_desc">Previous, play or pause, and next for the app that is playing.</string>
 </resources>

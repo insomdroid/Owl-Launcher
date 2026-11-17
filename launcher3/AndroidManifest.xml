@@ -128,6 +128,28 @@
             </intent-filter>
         </activity>
 
+        <receiver android:name="com.android.launcher3.owl.widget.OwlClockWidget"
+            android:exported="false"
+            android:label="@string/owl_clock_widget_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.android.launcher3.owl.widget.CLOCK_TICK" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/owl_clock_widget_info" />
+        </receiver>
+        <receiver android:name="com.android.launcher3.owl.widget.OwlMediaWidget"
+            android:exported="false"
+            android:label="@string/owl_media_widget_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.android.launcher3.owl.widget.MEDIA_PREV" />
+                <action android:name="com.android.launcher3.owl.widget.MEDIA_PLAY" />
+                <action android:name="com.android.launcher3.owl.widget.MEDIA_NEXT" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/owl_media_widget_info" />
+        </receiver>
         <receiver android:name="com.android.launcher3.SessionCommitReceiver" android:exported="true">
             <intent-filter><action android:name="android.content.pm.action.SESSION_COMMITTED" /></intent-filter>
         </receiver>

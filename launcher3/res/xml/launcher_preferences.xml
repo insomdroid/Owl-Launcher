@@ -19,18 +19,11 @@
     xmlns:launcher="http://schemas.android.com/apk/res-auto">
 
 
-    <com.android.launcher3.owl.OwlIconPackRow
-        android:key="pref_owl_icon_pack"
-        android:title="@string/owl_icon_pack_title"
-        android:fragment="com.android.launcher3.owl.OwlIconPackFragment" />
     <PreferenceCategory android:title="@string/owl_group_icons">
-
-    <SwitchPreferenceCompat
-            android:key="pref_allapps_themed_icons"
-            android:title="@string/pref_themed_icons_title"
-            android:summary="@string/pref_themed_icons_summary"
-            android:defaultValue="false"
-            android:persistent="true" />
+    <com.android.launcher3.owl.OwlIconPackRow
+            android:key="pref_owl_icon_pack"
+            android:title="@string/owl_icon_pack_title"
+            android:fragment="com.android.launcher3.owl.OwlIconPackFragment" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/owl_group_home_screen">
@@ -104,15 +97,6 @@
             android:key="pref_enable_minus_one"
             android:summary="@string/pref_show_google_now_summary"
             android:title="@string/title_show_google_app" />
-
-    <androidx.preference.PreferenceScreen
-            android:key="pref_suggestions"
-            android:title="@string/pref_suggestions_title"
-            android:summary="@string/pref_suggestions_summary"
-            android:persistent="false">
-
-            <intent android:action="android.settings.ACTION_CONTENT_SUGGESTIONS_SETTINGS" />
-        </androidx.preference.PreferenceScreen>
 
     <Preference
             android:key="pref_trust_apps"

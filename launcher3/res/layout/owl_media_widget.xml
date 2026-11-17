@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/owl_card"
+    android:orientation="vertical"
+    android:padding="12dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/owl_geist_mono"
+        android:text="@string/owl_media_widget_label"
+        android:textAllCaps="true"
+        android:textColor="@color/owl_secondary"
+        android:textSize="10sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/owl_media_prev"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/owl_geist_mono"
+            android:gravity="center"
+            android:text="PREV"
+            android:textColor="@color/owl_primary"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/owl_media_play"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.4"
+            android:fontFamily="@font/owl_doto_rond"
+            android:gravity="center"
+            android:text="PLAY"
+            android:textColor="@color/owl_display"
+            android:textSize="28sp" />
+        <TextView
+            android:id="@+id/owl_media_next"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/owl_geist_mono"
+            android:gravity="center"
+            android:text="NEXT"
+            android:textColor="@color/owl_primary"
+            android:textSize="12sp" />
+    </LinearLayout>
+</LinearLayout>

@@ -6,6 +6,8 @@ package com.android.launcher3.owl
 
 import android.content.ComponentName
 import android.content.Context
+import com.android.launcher3.LauncherAppState
+import com.android.launcher3.LauncherPrefs
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
@@ -14,6 +16,16 @@ import com.android.launcher3.LauncherPrefs
 import org.xmlpull.v1.XmlPullParser
 
 object OwlIconPacks {
+
+    /** Stores the choice, drops cached icons, and reloads home and All Apps at once. */
+    fun select(context: Context, pkg: String) {
+        LauncherPrefs.get(context).put(LauncherPrefs.OWL_ICON_PACK to pkg)
+        val app = LauncherAppState.getInstance(context)
+        app.iconCache.invalidateAllIcons {
+            android.os.Handler(android.os.Looper.getMainLooper()).post { app.model.forceReload() }
+        }
+    }
+
 
     private val PACK_INTENTS = listOf(
         "org.adw.launcher.THEMES",
