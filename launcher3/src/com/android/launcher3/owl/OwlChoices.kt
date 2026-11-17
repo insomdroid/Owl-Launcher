@@ -36,6 +36,9 @@ object OwlChoices {
             "#1C1C1C" to "Charcoal",
         ),
         "owl_home_page" to (0..9).map { it.toString() to "Page ${it + 1}" },
+        "owl_grid" to listOf("" to "Automatic") + listOf(
+            "2_by_2", "3_by_3", "4_by_5", "5_by_5", "5_by_6", "5_by_7", "6_by_5", "6_by_6",
+        ).map { it to it.replace("_by_", " × ") },
         "owl_label_color_home" to LABEL_COLORS,
         "owl_label_color_dock" to LABEL_COLORS,
         "owl_label_color_drawer" to LABEL_COLORS,
@@ -52,6 +55,7 @@ object OwlChoices {
         "owl_backplate_mode" -> LauncherPrefs.get(context).get(LauncherPrefs.OWL_BACKPLATE_MODE)
         "owl_backplate_color" -> LauncherPrefs.get(context).get(LauncherPrefs.OWL_BACKPLATE_COLOR)
         "owl_home_page" -> LauncherPrefs.get(context).get(LauncherPrefs.OWL_HOME_PAGE)
+        "owl_grid" -> LauncherPrefs.get(context).get(LauncherPrefs.GRID_NAME).orEmpty()
         "owl_label_color_home" -> LauncherPrefs.get(context).get(LauncherPrefs.OWL_LABEL_COLOR_HOME)
         "owl_label_color_dock" -> LauncherPrefs.get(context).get(LauncherPrefs.OWL_LABEL_COLOR_DOCK)
         "owl_label_color_drawer" -> LauncherPrefs.get(context).get(LauncherPrefs.OWL_LABEL_COLOR_DRAWER)
@@ -65,6 +69,10 @@ object OwlChoices {
             "owl_backplate_mode" -> prefs.put(LauncherPrefs.OWL_BACKPLATE_MODE to value)
             "owl_backplate_color" -> prefs.put(LauncherPrefs.OWL_BACKPLATE_COLOR to value)
             "owl_home_page" -> prefs.put(LauncherPrefs.OWL_HOME_PAGE to value)
+            "owl_grid" -> if (value.isNotEmpty()) {
+                // Changing the grid reloads the device profile and the database.
+                com.android.launcher3.InvariantDeviceProfile.INSTANCE.get(context).setCurrentGrid(value)
+            }
             "owl_label_color_home" -> prefs.put(LauncherPrefs.OWL_LABEL_COLOR_HOME to value)
             "owl_label_color_dock" -> prefs.put(LauncherPrefs.OWL_LABEL_COLOR_DOCK to value)
             "owl_label_color_drawer" -> prefs.put(LauncherPrefs.OWL_LABEL_COLOR_DRAWER to value)

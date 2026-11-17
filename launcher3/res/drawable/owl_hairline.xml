@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Owl: 1dp hairline used between settings rows. -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
-    <size android:height="1dp" />
-    <solid android:color="@color/owl_line" />
-</shape>
+<!-- Owl: 1dp hairline between settings rows, inset to line up with the row text. -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="24dp"
+    android:insetRight="16dp">
+    <shape android:shape="rectangle">
+        <size android:height="1dp" />
+        <solid android:color="@color/owl_line" />
+    </shape>
+</inset>

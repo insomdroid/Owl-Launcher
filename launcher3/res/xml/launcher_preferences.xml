@@ -134,6 +134,13 @@
             <extra android:name="owl_pref" android:value="owl_label_color_home" />
         </com.android.launcher3.owl.OwlChoiceRow>
         <com.android.launcher3.owl.OwlChoiceRow
+            android:key="owl_grid"
+            android:title="Grid size"
+            android:summary="Columns and rows of the home screen"
+            android:fragment="com.android.launcher3.owl.OwlChoiceFragment">
+            <extra android:name="owl_pref" android:value="owl_grid" />
+        </com.android.launcher3.owl.OwlChoiceRow>
+        <com.android.launcher3.owl.OwlChoiceRow
             android:key="owl_home_page"
             android:title="Home page"
             android:summary="The page the HOME button returns to"
@@ -270,6 +277,17 @@
             android:summary="@string/drawer_open_keyboard_summary"
             android:defaultValue="false"
             android:persistent="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Backup">
+        <Preference
+            android:key="owl_backup_export"
+            android:title="Export settings"
+            android:summary="Save all launcher settings to a file" />
+        <Preference
+            android:key="owl_backup_import"
+            android:title="Restore settings"
+            android:summary="Load settings from a backup file" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/owl_group_gestures_and_more">

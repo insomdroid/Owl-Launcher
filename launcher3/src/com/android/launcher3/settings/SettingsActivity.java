@@ -99,6 +99,10 @@ public class SettingsActivity extends FragmentActivity
     private static final String KEY_DRAWER_PICTURE = "owl_drawer_picture";
     private static final String KEY_DRAWER_PICTURE_CLEAR = "owl_drawer_picture_clear";
     private static final int REQUEST_DRAWER_PICTURE = 4001;
+    private static final String KEY_BACKUP_EXPORT = "owl_backup_export";
+    private static final String KEY_BACKUP_IMPORT = "owl_backup_import";
+    private static final int REQUEST_BACKUP_EXPORT = 4002;
+    private static final int REQUEST_BACKUP_IMPORT = 4003;
     private static final String SUGGESTIONS_PACKAGE = "com.google.android.as";
 
     @Override
@@ -231,6 +235,21 @@ public class SettingsActivity extends FragmentActivity
                     && data != null && data.getData() != null) {
                 com.android.launcher3.owl.OwlDrawerAppearance.INSTANCE.importPicture(
                         getActivity(), data.getData());
+            }
+            if (resultCode != android.app.Activity.RESULT_OK || data == null || data.getData() == null) {
+                return;
+            }
+            if (requestCode == REQUEST_BACKUP_EXPORT) {
+                boolean ok = com.android.launcher3.owl.OwlBackup.INSTANCE.export(
+                        getActivity(), data.getData());
+                android.widget.Toast.makeText(getActivity(),
+                        ok ? "Settings exported" : "Export failed", android.widget.Toast.LENGTH_SHORT).show();
+            } else if (requestCode == REQUEST_BACKUP_IMPORT) {
+                boolean ok = com.android.launcher3.owl.OwlBackup.INSTANCE.restore(
+                        getActivity(), data.getData());
+                android.widget.Toast.makeText(getActivity(),
+                        ok ? "Settings restored" : "Restore failed", android.widget.Toast.LENGTH_SHORT).show();
+                if (ok) getActivity().recreate();
             }
         }
 
@@ -424,6 +443,25 @@ public class SettingsActivity extends FragmentActivity
                         pick.setType("image/*");
                         pick.addCategory(Intent.CATEGORY_OPENABLE);
                         startActivityForResult(pick, REQUEST_DRAWER_PICTURE);
+                        return true;
+                    });
+                    return true;
+                case KEY_BACKUP_EXPORT:
+                    preference.setOnPreferenceClickListener(p -> {
+                        Intent create = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+                        create.setType("application/json");
+                        create.addCategory(Intent.CATEGORY_OPENABLE);
+                        create.putExtra(Intent.EXTRA_TITLE, "owl-launcher-settings.json");
+                        startActivityForResult(create, REQUEST_BACKUP_EXPORT);
+                        return true;
+                    });
+                    return true;
+                case KEY_BACKUP_IMPORT:
+                    preference.setOnPreferenceClickListener(p -> {
+                        Intent open = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                        open.setType("application/json");
+                        open.addCategory(Intent.CATEGORY_OPENABLE);
+                        startActivityForResult(open, REQUEST_BACKUP_IMPORT);
                         return true;
                     });
                     return true;
