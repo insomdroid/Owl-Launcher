@@ -17,8 +17,8 @@
 */
 -->
 <resources>
-    <color name="themed_icon_color">#0842A0</color>
-    <color name="themed_icon_background_color">#D3E3FD</color>
+    <color name="themed_icon_color">#FF000000</color>
+    <color name="themed_icon_background_color">#00000000</color>
     <color name="themed_badge_icon_color">#0842A0</color>
     <color name="themed_badge_icon_background_color">#D3E3FD</color>
 

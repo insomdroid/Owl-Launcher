@@ -93,3 +93,9 @@ Angka berdiri sendiri (jam, tanggal, jumlah notifikasi) memakai Doto. Satuan kec
 ## Tes akhir
 
 Letakkan layar di samping referensi web. Jika orang asing bisa membedakan mana yang bukan produk Owl Launcher, perbaiki sampai sama.
+
+## Ikon default (diperbarui)
+
+- Ikon monokrom default aktif di All Apps (`ALLAPPS_THEMED_ICONS` = true).
+- Latar ikon transparan penuh di Light dan Dark. Glyph hitam di Light, putih di Dark. Warna ini diatur di `themed_icon_*` pada `libs_systemui/iconloaderlib/res/values*/colors.xml`, bukan dari warna dinamis Material You.
+- Referensi visual: nothing-icongen (AGPL-3.0). Tidak ada kode dari repo itu yang disalin. Implementasi memakai pipeline monokrom Launcher3 yang sudah ada.
