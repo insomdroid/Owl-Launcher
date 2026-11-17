@@ -17,18 +17,17 @@ import org.xmlpull.v1.XmlPullParser
 object OwlIconPacks {
 
     /**
-     * Stores the choice, drops every cached icon, then restarts the launcher process so no
-     * in-memory icon state survives. The system starts the launcher again with the new pack.
+     * Stores the choice and drops cached icons. Home and All Apps reload with the new pack,
+     * without restarting the launcher.
      */
     fun select(context: Context, pkg: String) {
         LauncherPrefs.get(context).put(LauncherPrefs.OWL_ICON_PACK to pkg)
         val app = LauncherAppState.getInstance(context)
         app.iconCache.invalidateAllIcons {
-            android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-                android.os.Process.killProcess(android.os.Process.myPid())
-            }, 400L)
+            android.os.Handler(android.os.Looper.getMainLooper()).post { app.model.forceReload() }
         }
     }
+
 
     private val PACK_INTENTS = listOf(
         "org.adw.launcher.THEMES",
@@ -69,16 +68,28 @@ object OwlIconPacks {
             val id = res.getIdentifier(drawableName, "drawable", pack)
             if (id == 0) null else res.getDrawableForDensity(id, dpi, null)
         } catch (e: Exception) {
+            android.util.Log.w("OwlIconPacks", "Icon pack $pack failed for $component", e)
             null
         }
     }
 
     private fun readAppFilter(packContext: Context): Map<ComponentName, String> {
         val res = packContext.resources
-        val xmlId = res.getIdentifier("appfilter", "xml", packContext.packageName)
-        if (xmlId == 0) return emptyMap()
         val map = HashMap<ComponentName, String>()
-        val parser = res.getXml(xmlId)
+        val xmlId = res.getIdentifier("appfilter", "xml", packContext.packageName)
+        val parser: XmlPullParser = if (xmlId != 0) {
+            res.getXml(xmlId)
+        } else {
+            val assetParser = android.util.Xml.newPullParser()
+            try {
+                packContext.assets.open("appfilter.xml").use { input ->
+                    assetParser.setInput(input, "utf-8")
+                }
+            } catch (e: java.io.IOException) {
+                return emptyMap()
+            }
+            assetParser
+        }
         try {
             var event = parser.eventType
             while (event != XmlPullParser.END_DOCUMENT) {

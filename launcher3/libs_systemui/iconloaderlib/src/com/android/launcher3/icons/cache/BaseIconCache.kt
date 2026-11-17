@@ -170,6 +170,8 @@ constructor(
     /** Drops every cached icon (memory and DB) so the next load re-resolves icons, then runs [onDone]. */
     fun invalidateAllIcons(onDone: Runnable) = workerHandler.post {
         synchronized(this) {
+            // Re-read the provider state first, so the new icon pack is part of the cache key.
+            updateSystemState()
             defaultIcon = null
             userFlagOpMap.clear()
             iconDb.clear()
