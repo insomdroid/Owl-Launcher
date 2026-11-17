@@ -1,16 +1,16 @@
-# Owl Launcher — Panduan Desain
+# Owl Launcher — Design Guide
 
-Sumber acuan: [vibe-nothing-ui-design](https://github.com/wangbh030722/vibe-nothing-ui-design) (MIT), diterjemahkan dari web ke Android. Aturan ditulis ulang dengan kata-kata sendiri.
+Reference: [vibe-nothing-ui-design](https://github.com/wangbh030722/vibe-nothing-ui-design) (MIT), translated from web to Android. The rules below are rewritten in our own words.
 
-## Keputusan
+## Decisions
 
-- **Tema:** mengikuti sistem, dengan pilihan Light, Dark, dan AMOLED.
-- **Font:** Doto (tampilan dot), Geist (UI), Geist Mono (label dan data). Semua SIL OFL 1.1.
-- **Ikon:** monokrom secara default.
-- **Jam dot-matrix:** wajib di versi pertama.
-- **Cakupan:** homescreen, widget, dan pengaturan.
+- **Theme:** follows the system by default, with Light, Dark, and AMOLED options.
+- **Fonts:** Doto (dot display), Geist (UI), Geist Mono (labels and data). All SIL OFL 1.1.
+- **Icons:** monochrome by default.
+- **Dot-matrix clock:** required in the first version.
+- **Scope:** home screen, widgets, and settings.
 
-## Warna (token)
+## Colors (tokens)
 
 | Token | Dark | Light | AMOLED |
 |---|---|---|---|
@@ -29,73 +29,72 @@ Sumber acuan: [vibe-nothing-ui-design](https://github.com/wangbh030722/vibe-noth
 | `warning` | `#F2C94C` | `#9C6B00` | `#F2C94C` |
 | `error` | `#FF5247` | `#D23B30` | `#FF5247` |
 
-Di Android: semua token ada di satu tempat, `launcher3/src/com/android/launcher3/owl/OwlTheme.kt` (`OwlTokens`), dengan mode `SYSTEM`, `LIGHT`, `DARK`, dan `AMOLED`. Font ada di `launcher3/res/font/`, dan helpernya di `OwlFonts.kt`.
+In code, all tokens live in one place: `launcher3/src/com/android/launcher3/owl/OwlTheme.kt` (`OwlTokens`), with modes `SYSTEM`, `LIGHT`, `DARK`, and `AMOLED`. Fonts are in `launcher3/res/font/`, with helpers in `OwlFonts.kt`.
 
-## Aturan keras
+## Hard rules
 
-1. Monokrom sebagai dasar, maksimal empat abu-abu per layar, semuanya dari token.
-2. Merah (`accent`) hanya untuk sinyal: notifikasi yang butuh tindakan, status yang butuh input, dot rekaman atau live. Jangan dipakai di tombol, tab, atau hover.
-3. Status aktif berupa inversi hitam-putih.
-4. Teks fungsional memakai sans-serif (Geist).
-5. Tanpa shadow dan gradien. Kedalaman dibuat dengan hairline 1dp dan spasi. Kartu tanpa border.
-6. Radius hanya 6dp (kontrol), 8dp (kartu, dialog), dan pill (chip, switch).
-7. Semua nilai diambil dari token, tanpa hex mentah di layout.
+1. Monochrome as the base, at most four grays per screen, all taken from tokens.
+2. Red (`accent`) only for signals: notifications that need action, input required, recording or live dots. Never on buttons, tabs, or hover.
+3. Active state is an inverted black-and-white fill.
+4. Functional text uses sans-serif (Geist).
+5. No shadows or gradients. Depth comes from 1dp hairlines and spacing. Cards have no border.
+6. Radius only: 6dp (controls), 8dp (cards and dialogs), pill (chips and switches).
+7. All values come from tokens. No raw hex in layouts.
 
-## Spacing dan geometri
+## Spacing and geometry
 
-- Skala 4dp: 4, 8, 12, 16, 20, 24, 32, 40, 64.
-- Padding modul 16–24dp.
-- Hairline 1dp.
+- 4dp scale: 4, 8, 12, 16, 20, 24, 32, 40, 64.
+- Module padding 16–24dp.
+- Hairlines 1dp.
 
-## Tipografi
+## Typography
 
-| Peran | Font | Catatan |
+| Role | Font | Notes |
 |---|---|---|
-| Dot display | Doto, ROND 100, weight ≤ 500 | Untuk jam, tanggal, dan angka berdiri sendiri |
-| UI | Geist | Judul 600, isi 400 |
-| Label dan data | Geist Mono | Uppercase, 9–10sp, letter-spacing 0.08–0.14em |
+| Dot display | Doto | Clock, date, and standalone numbers |
+| UI | Geist | Titles at 600, body at 400 |
+| Labels and data | Geist Mono | Uppercase, 9–10sp, letter-spacing 0.08–0.14em |
 
-Angka berdiri sendiri (jam, tanggal, jumlah notifikasi) memakai Doto. Satuan kecil tetap Geist Mono.
+Standalone numbers (time, date, notification counts) use Doto. Small units stay in Geist Mono.
 
-## Latar dot field
+Known limitation: the bundled Doto is a static weight, so the `ROND` axis (round dots) is not applied. A variable font would be needed for that.
 
-- Titik radius sekitar 1.3px (dalam dp dikonversi dari referensi web), jarak 120px (sekitar 40dp).
-- Diberi blend difference di belakang kartu.
-- Diimplementasikan sebagai `DotGridDrawable` di `nothingstyle/`.
+## Dot-grid background
 
-## Jam dot-matrix
+- Dot radius about 1dp, spacing about 40dp (converted from the 120px web reference).
+- Implemented as `OwlDotGridView` in `com.android.launcher3.owl`.
 
-- Diimplementasikan sebagai `DotMatrixClockView` di `nothingstyle/`, dengan glyph 5×7 (`DotFont`).
-- Animasi detik hanya berjalan saat view terlihat, untuk menghemat baterai.
+## Dot-matrix clock
 
-## Ikon
+- `OwlDotClockView` draws `HH:mm` with the 5×7 glyphs in `DotFont`.
+- Redraws once per minute, aligned to the minute boundary. The timer stops while the window is not visible.
 
-- Default monokrom lewat `MonoIconThemeFactory` yang sudah ada di basis.
-- Ikon status 9×9 berupa lingkaran penuh, tanpa mask atau dotted border.
-- Ikon fungsional: garis 1.5dp, ujung bulat, `stroke` mengikuti warna teks.
+## Icons
 
-## Komponen per layar
+- Monochrome themed icons are on by default in All Apps (`ALLAPPS_THEMED_ICONS` = true).
+- Transparent background. Black glyph in Light, white glyph in Dark. Colors are set in `themed_icon_*` in `libs_systemui/iconloaderlib/res/values*/colors.xml`, not from Material You dynamic colors.
+- Launcher icon: Owl mark on black, with a monochrome layer. Logos in `docs/brand/`.
 
-**Homescreen:** latar dot field, label ikon dalam Geist Mono uppercase, hotseat dengan jam dot-matrix.
+## Components by screen
 
-**Widget:** kartu kaca transparan dengan hairline, judul Geist 600, deskripsi Geist Mono 10sp.
+**Home screen:** dot-grid background, app labels in Geist Mono, dot-matrix clock at the top.
 
-**Pengaturan:** daftar dengan hairline, switch pill (track putih saat aktif, knob hitam), chip segmen untuk pilihan tema, dialog radius 8dp dengan tombol teks dan tombol inversi.
+**Widgets:** not styled yet. Planned: translucent card with hairline border, title in Geist 600, description in Geist Mono 10sp.
 
-**All Apps:** daftar dengan hairline, pencarian berupa field outline, tanpa warna aksen.
+**Settings:** Owl theme choice (System, Light, Dark, AMOLED). Planned: list rows with hairlines, pill switches (white track when on, black knob), dialogs with 8dp radius.
+
+**All Apps:** not styled yet. Planned: list rows with hairlines, outlined search field, no accent color.
 
 ## Motion
 
-- Easing `ease-in-out` saja, tanpa spring atau bounce.
-- Kontrol 200ms, ganti tema 350ms.
-- Tekan: opacity 0.6.
+- Easing `ease-in-out` only. No spring or bounce.
+- Controls 200ms, theme change 350ms.
+- Pressed state: opacity 0.6.
 
-## Tes akhir
+## Final check
 
-Letakkan layar di samping referensi web. Jika orang asing bisa membedakan mana yang bukan produk Owl Launcher, perbaiki sampai sama.
+Place a screen next to the web reference. If someone can't tell which one is the Owl Launcher, keep refining until they match.
 
-## Ikon default (diperbarui)
+## Fonts and licenses
 
-- Ikon monokrom default aktif di All Apps (`ALLAPPS_THEMED_ICONS` = true).
-- Latar ikon transparan penuh di Light dan Dark. Glyph hitam di Light, putih di Dark. Warna ini diatur di `themed_icon_*` pada `libs_systemui/iconloaderlib/res/values*/colors.xml`, bukan dari warna dinamis Material You.
-- Referensi visual: nothing-icongen (AGPL-3.0). Tidak ada kode dari repo itu yang disalin. Implementasi memakai pipeline monokrom Launcher3 yang sudah ada.
+Licenses for the bundled fonts are in `docs/fonts/OFL/`.

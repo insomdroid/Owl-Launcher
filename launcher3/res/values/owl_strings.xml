@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="owl_theme_title">Tema Owl</string>
-    <string name="owl_theme_summary">Ikuti sistem, terang, gelap, atau AMOLED. Berlaku setelah launcher dibuka ulang.</string>
+    <string name="owl_theme_title">Owl theme</string>
+    <string name="owl_theme_summary">System, Light, Dark, or AMOLED. Takes effect after reopening the launcher.</string>
     <string-array name="owl_theme_entries">
-        <item>Ikuti sistem</item>
-        <item>Terang</item>
-        <item>Gelap</item>
+        <item>System</item>
+        <item>Light</item>
+        <item>Dark</item>
         <item>AMOLED</item>
     </string-array>
     <string-array name="owl_theme_values">
