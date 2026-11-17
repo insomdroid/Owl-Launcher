@@ -40,5 +40,9 @@ Build sukses hanya membuktikan kompilasi. Pengujian di perangkat dilakukan terpi
 | Basis Launcher3 dapat dibangun | Belum diverifikasi di CI untuk repo ini |
 | Nama dan package ID | Selesai |
 | Lisensi | Selesai |
-| Gaya visual (warna, icon, workspace, All Apps) | Belum dimulai |
-| Logo dan ikon | Belum dimulai |
+| Tema Light, Dark, AMOLED, dan System (pengaturan Tema Owl) | Dipasang, belum diuji di perangkat |
+| Font Doto, Geist, Geist Mono (label aplikasi) | Dipasang, belum diuji di perangkat |
+| Latar dot-grid dan jam dot-matrix di homescreen | Dipasang, belum diuji di perangkat |
+| Ikon monokrom transparan (All Apps) | Dipasang, belum diuji di perangkat |
+| Logo dan ikon launcher | Dipasang, belum diuji di perangkat |
+| Gaya widget dan All Apps lengkap | Belum dimulai |

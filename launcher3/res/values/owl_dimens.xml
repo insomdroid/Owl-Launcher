@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="owl_clock_height">56dp</dimen>
+    <dimen name="owl_clock_top">48dp</dimen>
+    <dimen name="owl_clock_side">32dp</dimen>
+</resources>

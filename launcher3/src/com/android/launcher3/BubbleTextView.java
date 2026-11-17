@@ -270,6 +270,10 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver,
     public BubbleTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mActivity = ActivityContext.lookupContext(context);
+        android.graphics.Typeface owlMono = com.android.launcher3.owl.OwlFonts.INSTANCE.geistMono(context);
+        if (owlMono != null) {
+            setTypeface(owlMono);
+        }
         mMinimizedStateDescription = getContext().getString(
                 R.string.app_minimized_state_description);
         mRunningStateDescription = getContext().getString(R.string.app_running_state_description);

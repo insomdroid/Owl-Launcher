@@ -7,6 +7,7 @@ package com.android.launcher3.owl
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
+import com.android.launcher3.LauncherPrefs
 
 enum class OwlThemeMode { SYSTEM, LIGHT, DARK, AMOLED }
 
@@ -82,4 +83,13 @@ object OwlTokens {
             if (night) DARK else LIGHT
         }
     }
+
+    /** Theme mode saved in settings; unknown values fall back to SYSTEM. */
+    fun modeOf(context: Context): OwlThemeMode {
+        val raw = LauncherPrefs.OWL_THEME_MODE.get(context)
+        return OwlThemeMode.values().firstOrNull { it.name.equals(raw, ignoreCase = true) }
+            ?: OwlThemeMode.SYSTEM
+    }
+
+    fun current(context: Context): OwlPalette = resolve(modeOf(context), context)
 }

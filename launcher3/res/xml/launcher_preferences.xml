@@ -26,6 +26,15 @@
         android:summaryOn="@string/settings_lock_layout_summary_on"
         android:summaryOff="@string/settings_lock_layout_summary_off" />
 
+    <androidx.preference.ListPreference
+        android:key="pref_owl_theme_mode"
+        android:title="@string/owl_theme_title"
+        android:summary="@string/owl_theme_summary"
+        android:entries="@array/owl_theme_entries"
+        android:entryValues="@array/owl_theme_values"
+        android:defaultValue="system"
+        android:persistent="true" />
+
     <SwitchPreferenceCompat
         android:defaultValue="false"
         android:key="pref_sleep_gesture"

@@ -28,6 +28,11 @@
         android:clipToPadding="false"
         android:importantForAccessibility="no">
 
+        <!-- Owl: sparse dot field behind everything -->
+        <com.android.launcher3.owl.OwlDotGridView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <com.android.launcher3.views.AccessibilityActionsView
             android:id="@+id/accessibility_action_view"
             android:layout_width="match_parent"
@@ -44,6 +49,16 @@
             android:layout_gravity="center"
             android:theme="@style/HomeScreenElementTheme"
             launcher:pageIndicator="@+id/page_indicator" />
+
+        <!-- Owl: dot-matrix clock at the top of the home screen -->
+        <com.android.launcher3.owl.OwlDotClockView
+            android:id="@+id/owl_dot_clock"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/owl_clock_height"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="@dimen/owl_clock_top"
+            android:layout_marginStart="@dimen/owl_clock_side"
+            android:layout_marginEnd="@dimen/owl_clock_side" />
 
         <!-- DO NOT CHANGE THE ID -->
         <include
