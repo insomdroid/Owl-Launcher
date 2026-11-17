@@ -8,4 +8,5 @@
     <color name="owl_primary">#1C1C1C</color>
     <color name="owl_display">#000000</color>
     <color name="owl_accent">#D71921</color>
+    <color name="owl_raised">#EDEDED</color>
 </resources>
