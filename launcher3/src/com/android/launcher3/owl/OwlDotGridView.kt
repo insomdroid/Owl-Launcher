@@ -1,5 +1,5 @@
 /*
- * Sparse dot field behind the workspace (design: 120px pitch on web, ~40dp here).
+ * Sparse dot field behind the workspace: 120dp pitch, ~1.3dp dots, 42% alpha.
  * Static drawing, no animation, so it costs nothing while idle.
  */
 package com.android.launcher3.owl
@@ -17,8 +17,8 @@ class OwlDotGridView @JvmOverloads constructor(
 ) : View(context, attrs, defStyle) {
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
-    private val pitch = 40f * resources.displayMetrics.density
-    private val radius = 1f * resources.displayMetrics.density
+    private val pitch = 120f * resources.displayMetrics.density
+    private val radius = 0.65f * resources.displayMetrics.density
     private var dotColor = 0x40FFFFFF
     private var bgColor = 0xFF000000.toInt()
 
@@ -32,7 +32,7 @@ class OwlDotGridView @JvmOverloads constructor(
     private fun refreshColor() {
         val palette = OwlTokens.current(context)
         bgColor = palette.bg
-        dotColor = (palette.display and 0x00FFFFFF) or (0x40 shl 24)
+        dotColor = (palette.display and 0x00FFFFFF) or (0x6B shl 24)
     }
 
     override fun onAttachedToWindow() {

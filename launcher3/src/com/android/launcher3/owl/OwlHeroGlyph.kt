@@ -46,6 +46,10 @@ class OwlHeroGlyph @JvmOverloads constructor(
 
     private val litPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
     private val unlitPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
+    private val panelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.FILL
+        color = 0xFF070707.toInt()
+    }
     private val statusPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
 
     init {
@@ -57,7 +61,7 @@ class OwlHeroGlyph @JvmOverloads constructor(
     private fun refreshColors() {
         val palette = OwlTokens.current(context)
         litPaint.color = palette.display
-        unlitPaint.color = (palette.display and 0x00FFFFFF) or (0x1A shl 24)
+        unlitPaint.color = 0x0FFFFFFF
         statusPaint.color = palette.accent
     }
 
@@ -74,8 +78,17 @@ class OwlHeroGlyph @JvmOverloads constructor(
         val radius = pitch * 0.36f
         val startX = (width - size * pitch) / 2f + pitch / 2f
         val startY = (height - size * pitch) / 2f + pitch / 2f
+        // Circular panel; cells outside the circle are not drawn (masked corners).
+        val cx = width / 2f
+        val cy = height / 2f
+        val panelRadius = size * pitch / 2f
+        canvas.drawCircle(cx, cy, panelRadius, panelPaint)
+        val mid = (size - 1) / 2f
         for (y in 0 until size) {
             for (x in 0 until size) {
+                val dx = x - mid
+                val dy = y - mid
+                if (dx * dx + dy * dy > (size / 2f) * (size / 2f) - 0.5f) continue
                 val lit = rows[y][x] == '#'
                 canvas.drawCircle(startX + x * pitch, startY + y * pitch, radius,
                     if (lit) litPaint else unlitPaint)

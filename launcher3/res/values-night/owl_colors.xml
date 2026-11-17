@@ -11,4 +11,5 @@
     <color name="owl_raised">#171717</color>
     <color name="owl_muted">#5A5A5A</color>
     <color name="owl_card">#1AFFFFFF</color>
+    <color name="owl_glass">#E6101010</color>
 </resources>

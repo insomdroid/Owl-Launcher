@@ -274,6 +274,7 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver,
             setTypeface(owlMono);
             // Owl labels: uppercase monospace, per the design guide.
             setAllCaps(true);
+        setLetterSpacing(0.1f);
         }
         mMinimizedStateDescription = getContext().getString(
                 R.string.app_minimized_state_description);

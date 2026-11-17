@@ -12,7 +12,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.util.Xml
-import com.android.launcher3.LauncherPrefs
 import org.xmlpull.v1.XmlPullParser
 
 object OwlIconPacks {

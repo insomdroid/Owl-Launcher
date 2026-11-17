@@ -847,6 +847,8 @@ public class ActivityAllAppsContainerView<T extends Context & ActivityContext>
     }
 
     int getBottomSheetBackgroundColor() {
+        // Owl: solid background token, no blur or tint.
+        return com.android.launcher3.owl.OwlTokens.INSTANCE.current(getContext()).getBg();
         if (!Flags.allAppsBlur()) {
             return mBottomSheetBackgroundColorLegacy;
         }
