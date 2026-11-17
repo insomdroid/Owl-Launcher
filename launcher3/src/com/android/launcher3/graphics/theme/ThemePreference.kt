@@ -99,7 +99,7 @@ private constructor(
         @JvmField val MONO_THEME_VALUE = ThemeValue(MONO_FACTORY_ID, MONO_THEME_CONTROLLER.themeID)
 
         private const val KEY_ICON_THEME = "icon_theme_id"
-        private val THEME_ID = backedUpItem(KEY_ICON_THEME, "")
+        private val THEME_ID = backedUpItem(KEY_ICON_THEME, MONO_THEME_VALUE.toString())
 
         @VisibleForTesting val LEGACY_MONO_THEME_ICON = backedUpItem("themed_icons", false)
 

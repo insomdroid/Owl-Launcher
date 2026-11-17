@@ -102,6 +102,12 @@ public class SettingsActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
+        // Owl: paint the settings screen with the Owl background for the current theme.
+        com.android.launcher3.owl.OwlPalette owlPalette =
+                com.android.launcher3.owl.OwlTokens.INSTANCE.current(this);
+        findViewById(R.id.content_parent).setBackgroundColor(owlPalette.getBg());
+        getWindow().setStatusBarColor(owlPalette.getBg());
+        getWindow().setNavigationBarColor(owlPalette.getBg());
 
         setActionBar(findViewById(R.id.action_bar));
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
