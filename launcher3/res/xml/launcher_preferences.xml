@@ -24,6 +24,10 @@
             android:key="pref_owl_icon_pack"
             android:title="@string/owl_icon_pack_title"
             android:fragment="com.android.launcher3.owl.OwlIconPackFragment" />
+        <com.android.launcher3.owl.OwlUnthemedRow
+            android:key="owl_unthemed_mode"
+            android:title="Apps outside the pack"
+            android:fragment="com.android.launcher3.owl.OwlUnthemedFragment" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/owl_group_wallpaper">

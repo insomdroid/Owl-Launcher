@@ -67,7 +67,25 @@ public class LauncherIconProvider extends IconProvider {
     public Drawable getIcon(ComponentInfo info, int iconDpi) {
         Drawable fromPack = com.android.launcher3.owl.OwlIconPacks.INSTANCE.iconFor(
                 mContext, new android.content.ComponentName(info.packageName, info.name), iconDpi);
-        return fromPack != null ? fromPack : super.getIcon(info, iconDpi);
+        if (fromPack != null) return fromPack;
+        android.content.ComponentName cn =
+                new android.content.ComponentName(info.packageName, info.name);
+        String mode = com.android.launcher3.owl.OwlIconPacks.INSTANCE.unthemedMode(mContext);
+        if (!com.android.launcher3.owl.OwlIconPacks.INSTANCE.selected(mContext).isEmpty()
+                && !"automatic".equals(mode)) {
+            try {
+                Drawable raw = mContext.getPackageManager().getActivityIcon(cn).mutate();
+                if ("monochrome".equals(mode)) {
+                    android.graphics.ColorMatrix matrix = new android.graphics.ColorMatrix();
+                    matrix.setSaturation(0f);
+                    raw.setColorFilter(new android.graphics.ColorMatrixColorFilter(matrix));
+                }
+                return raw;
+            } catch (android.content.pm.PackageManager.NameNotFoundException e) {
+                // Fall through to the default icon.
+            }
+        }
+        return super.getIcon(info, iconDpi);
     }
 
     @Override

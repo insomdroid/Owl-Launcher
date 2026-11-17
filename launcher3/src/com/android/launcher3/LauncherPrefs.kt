@@ -260,6 +260,7 @@ constructor(@ApplicationContext private val encryptedContext: Context) {
         @JvmField val DRAWER_BG_OPACITY = backedUpItem("owl_drawer_bg_opacity", 100)
         @JvmField val DOCK_ENABLED = backedUpItem("owl_dock_enabled", true)
         @JvmField val DOCK_BG_OPACITY = backedUpItem("owl_dock_bg_opacity", 0)
+        @JvmField val OWL_UNTHEMED_MODE = backedUpItem("owl_unthemed_icon_mode", "automatic")
         @JvmField
         val PROMISE_ICON_IDS = nonRestorableItem(InstallSessionHelper.PROMISE_ICON_IDS, "")
         @JvmField val WORK_EDU_STEP = backedUpItem("showed_work_profile_edu", 0)

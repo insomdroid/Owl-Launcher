@@ -54,6 +54,9 @@ object OwlIconPacks {
         packageName
     }
 
+    /** How apps outside the pack are drawn: automatic, original or monochrome. */
+    fun unthemedMode(context: Context): String = LauncherPrefs.get(context).get(LauncherPrefs.OWL_UNTHEMED_MODE)
+
     /** The package of the selected icon pack, or empty for none. */
     fun selected(context: Context): String = LauncherPrefs.get(context).get(LauncherPrefs.OWL_ICON_PACK)
 
