@@ -96,35 +96,13 @@ public class Hotseat extends CellLayout implements Insettable {
 
     private final View mQsb;
 
-    private final Runnable mOwlAutoHide = () -> animate().alpha(0f).setDuration(200).start();
-
-    /** Applies the Owl dock settings: visibility, background opacity, auto-hide. */
+    /** Applies the Owl dock settings: visibility and background opacity. */
     public void refreshOwlDockPrefs() {
-        removeCallbacks(mOwlAutoHide);
         setVisibility(LauncherPrefs.DOCK_ENABLED.get(getContext()) ? VISIBLE : INVISIBLE);
         int percent = LauncherPrefs.DOCK_BG_OPACITY.get(getContext());
         int surface = com.android.launcher3.owl.OwlTokens.INSTANCE.current(getContext()).getSurface();
         setBackgroundColor(androidx.core.graphics.ColorUtils.setAlphaComponent(
                 surface, Math.round(255f * percent / 100f)));
-        setAlpha(1f);
-        scheduleOwlAutoHide();
-    }
-
-    private void scheduleOwlAutoHide() {
-        removeCallbacks(mOwlAutoHide);
-        if (LauncherPrefs.DOCK_AUTO_HIDE.get(getContext())) {
-            postDelayed(mOwlAutoHide, 5000L);
-        }
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(android.view.MotionEvent ev) {
-        if (LauncherPrefs.DOCK_AUTO_HIDE.get(getContext())) {
-            animate().cancel();
-            setAlpha(1f);
-            scheduleOwlAutoHide();
-        }
-        return super.dispatchTouchEvent(ev);
     }
 
     public Hotseat(Context context) {

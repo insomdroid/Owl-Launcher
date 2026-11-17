@@ -833,7 +833,7 @@ public class ActivityAllAppsContainerView<T extends Context & ActivityContext>
     protected int getHeaderColor(float blendRatio) {
         if (!mActivityContext.getDeviceProfile().shouldShowAllAppsOnSheet()) {
             return ColorUtils.setAlphaComponent(
-                    ColorUtils.blendARGB(mScrimColor, mHeaderProtectionColor, blendRatio),
+                    ColorUtils.blendARGB(owlScrimColor(), mHeaderProtectionColor, blendRatio),
                     (int) (mSearchContainer.getAlpha() * 255));
         }
         return isBackgroundBlurEnabled()
@@ -843,7 +843,13 @@ public class ActivityAllAppsContainerView<T extends Context & ActivityContext>
 
     private int getBackgroundColor() {
         return mActivityContext.getDeviceProfile().shouldShowAllAppsOnSheet()
-                ? getBottomSheetBackgroundColor() : mScrimColor;
+                ? getBottomSheetBackgroundColor() : owlScrimColor();
+    }
+
+    /** Owl: scrim colour with the drawer background opacity from settings, read live. */
+    private int owlScrimColor() {
+        int percent = com.android.launcher3.LauncherPrefs.DRAWER_BG_OPACITY.get(getContext());
+        return ColorUtils.setAlphaComponent(mScrimColor, Math.round(255f * percent / 100f));
     }
 
     int getBottomSheetBackgroundColor() {

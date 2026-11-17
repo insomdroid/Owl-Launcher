@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Settings screen in Owl style: flat background, hairlines, monochrome controls. -->
+    <style name="Owl.TextAppearance.Category">
+        <item name="android:fontFamily">@font/owl_geist_mono</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/owl_secondary</item>
+        <item name="android:letterSpacing">0.12</item>
+    </style>
+
     <style name="Owl.Settings.Theme" parent="HomeSettings.Theme">
+        <item name="preferenceCategoryTitleTextAppearance">@style/Owl.TextAppearance.Category</item>
         <item name="android:windowBackground">@color/owl_bg</item>
         <item name="android:statusBarColor">@color/owl_bg</item>
         <item name="android:navigationBarColor">@color/owl_bg</item>
