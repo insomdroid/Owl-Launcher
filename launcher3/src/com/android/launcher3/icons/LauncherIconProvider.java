@@ -65,11 +65,14 @@ public class LauncherIconProvider extends IconProvider {
 
     @Override
     public Drawable getIcon(ComponentInfo info, int iconDpi) {
-        Drawable fromPack = com.android.launcher3.owl.OwlIconPacks.INSTANCE.iconFor(
-                mContext, new android.content.ComponentName(info.packageName, info.name), iconDpi);
-        if (fromPack != null) return new com.android.launcher3.icons.OwlPackDrawable(fromPack);
         android.content.ComponentName cn =
                 new android.content.ComponentName(info.packageName, info.name);
+        String shape = com.android.launcher3.owl.OwlAppearance.INSTANCE.shape(mContext);
+        int backplate = com.android.launcher3.owl.OwlAppearance.INSTANCE.backplate(mContext);
+        Drawable fromPack = com.android.launcher3.owl.OwlIconPacks.INSTANCE.iconFor(mContext, cn, iconDpi);
+        if (fromPack != null) {
+            return new com.android.launcher3.icons.OwlPackDrawable(fromPack, shape, 0);
+        }
         String mode = com.android.launcher3.owl.OwlIconPacks.INSTANCE.unthemedMode(mContext);
         if (!com.android.launcher3.owl.OwlIconPacks.INSTANCE.selected(mContext).isEmpty()
                 && !"automatic".equals(mode)) {
@@ -80,12 +83,16 @@ public class LauncherIconProvider extends IconProvider {
                     matrix.setSaturation(0f);
                     raw.setColorFilter(new android.graphics.ColorMatrixColorFilter(matrix));
                 }
-                return new com.android.launcher3.icons.OwlPackDrawable(raw);
+                return new com.android.launcher3.icons.OwlPackDrawable(raw, shape, backplate);
             } catch (android.content.pm.PackageManager.NameNotFoundException e) {
                 // Fall through to the default icon.
             }
         }
-        return super.getIcon(info, iconDpi);
+        Drawable def = super.getIcon(info, iconDpi);
+        if ("system".equals(shape) && backplate == 0) {
+            return def;
+        }
+        return new com.android.launcher3.icons.OwlPackDrawable(def, shape, backplate);
     }
 
     @Override

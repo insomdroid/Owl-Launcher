@@ -1209,6 +1209,9 @@ public class Launcher extends StatefulActivity<LauncherState>
     protected void onResume() {
         TraceHelper.INSTANCE.beginSection(ON_RESUME_EVT);
         super.onResume();
+        if (com.android.launcher3.owl.OwlAppearance.INSTANCE.consumeDirty(this)) {
+            com.android.launcher3.LauncherAppState.getInstance(this).getModel().forceReload();
+        }
         View owlDock = findViewById(R.id.hotseat);
         if (owlDock instanceof Hotseat) {
             ((Hotseat) owlDock).refreshOwlDockPrefs();

@@ -183,6 +183,12 @@ public class SettingsActivity extends FragmentActivity
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        com.android.launcher3.owl.OwlAppearance.INSTANCE.markDirty(this);
+    }
+
+    @Override
     public boolean onPreferenceStartScreen(PreferenceFragmentCompat caller, PreferenceScreen pref) {
         Bundle args = new Bundle();
         args.putString(ARG_PREFERENCE_ROOT, pref.getKey());

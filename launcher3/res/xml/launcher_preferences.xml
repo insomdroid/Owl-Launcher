@@ -28,6 +28,32 @@
             android:key="owl_unthemed_mode"
             android:title="Apps outside the pack"
             android:fragment="com.android.launcher3.owl.OwlUnthemedFragment" />
+        <com.android.launcher3.owl.OwlChoiceRow
+            android:key="owl_icon_shape"
+            android:title="Icon shape"
+            android:fragment="com.android.launcher3.owl.OwlChoiceFragment">
+            <extra android:name="owl_pref" android:value="owl_icon_shape" />
+        </com.android.launcher3.owl.OwlChoiceRow>
+        <com.android.launcher3.owl.OwlChoiceRow
+            android:key="owl_backplate_mode"
+            android:title="Backplate for apps outside the pack"
+            android:fragment="com.android.launcher3.owl.OwlChoiceFragment">
+            <extra android:name="owl_pref" android:value="owl_backplate_mode" />
+        </com.android.launcher3.owl.OwlChoiceRow>
+        <com.android.launcher3.owl.OwlChoiceRow
+            android:key="owl_backplate_color"
+            android:title="Backplate colour"
+            android:fragment="com.android.launcher3.owl.OwlChoiceFragment">
+            <extra android:name="owl_pref" android:value="owl_backplate_color" />
+        </com.android.launcher3.owl.OwlChoiceRow>
+        <SeekBarPreference
+            android:key="owl_backplate_opacity"
+            android:title="Backplate opacity"
+            android:defaultValue="100"
+            android:max="100"
+            app:min="0"
+            app:showSeekBarValue="true"
+            android:persistent="true" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/owl_group_wallpaper">
@@ -54,9 +80,53 @@
             app:min="0"
             app:showSeekBarValue="true"
             android:persistent="true" />
+        <SeekBarPreference
+            android:key="owl_scale_dock"
+            android:title="Dock icon size"
+            android:defaultValue="100"
+            android:max="150"
+            app:min="50"
+            app:showSeekBarValue="true"
+            android:persistent="true" />
+        <SeekBarPreference
+            android:key="owl_label_scale_dock"
+            android:title="Dock label size"
+            android:defaultValue="100"
+            android:max="150"
+            app:min="50"
+            app:showSeekBarValue="true"
+            android:persistent="true" />
+        <com.android.launcher3.owl.OwlChoiceRow
+            android:key="owl_label_color_dock"
+            android:title="Dock label colour"
+            android:fragment="com.android.launcher3.owl.OwlChoiceFragment">
+            <extra android:name="owl_pref" android:value="owl_label_color_dock" />
+        </com.android.launcher3.owl.OwlChoiceRow>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/owl_group_home_screen">
+        <SeekBarPreference
+            android:key="owl_scale_home"
+            android:title="Home icon size"
+            android:defaultValue="100"
+            android:max="150"
+            app:min="50"
+            app:showSeekBarValue="true"
+            android:persistent="true" />
+        <SeekBarPreference
+            android:key="owl_label_scale_home"
+            android:title="Home label size"
+            android:defaultValue="100"
+            android:max="150"
+            app:min="50"
+            app:showSeekBarValue="true"
+            android:persistent="true" />
+        <com.android.launcher3.owl.OwlChoiceRow
+            android:key="owl_label_color_home"
+            android:title="Home label colour"
+            android:fragment="com.android.launcher3.owl.OwlChoiceFragment">
+            <extra android:name="owl_pref" android:value="owl_label_color_home" />
+        </com.android.launcher3.owl.OwlChoiceRow>
         <SwitchPreferenceCompat
             android:key="owl_hide_status_bar"
             android:title="Hide status bar"
@@ -107,6 +177,28 @@
             app:min="0"
             app:showSeekBarValue="true"
             android:persistent="true" />
+        <SeekBarPreference
+            android:key="owl_scale_drawer"
+            android:title="Drawer icon size"
+            android:defaultValue="100"
+            android:max="150"
+            app:min="50"
+            app:showSeekBarValue="true"
+            android:persistent="true" />
+        <SeekBarPreference
+            android:key="owl_label_scale_drawer"
+            android:title="Drawer label size"
+            android:defaultValue="100"
+            android:max="150"
+            app:min="50"
+            app:showSeekBarValue="true"
+            android:persistent="true" />
+        <com.android.launcher3.owl.OwlChoiceRow
+            android:key="owl_label_color_drawer"
+            android:title="Drawer label colour"
+            android:fragment="com.android.launcher3.owl.OwlChoiceFragment">
+            <extra android:name="owl_pref" android:value="owl_label_color_drawer" />
+        </com.android.launcher3.owl.OwlChoiceRow>
         <SwitchPreferenceCompat
             android:key="pref_drawer_show_labels"
             android:title="@string/drawer_show_labels"

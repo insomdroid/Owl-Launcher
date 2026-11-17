@@ -200,6 +200,10 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver,
     protected boolean mIsIconVisible = true;
     @ViewDebug.ExportedProperty(category = "launcher")
     private int mTextColor;
+    // Owl: base sizes from the display profile; scale and colour come from settings per area.
+    private int mOwlBaseIconSize;
+    private float mOwlBaseTextSize;
+    private boolean mOwlDock;
     @ViewDebug.ExportedProperty(category = "launcher")
     private ColorStateList mTextColorStateList;
     @ViewDebug.ExportedProperty(category = "launcher")
@@ -335,6 +339,9 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver,
         mIconSize = a.getDimensionPixelSize(R.styleable.BubbleTextView_iconSizeOverride,
                 defaultIconSize);
         a.recycle();
+        mOwlBaseIconSize = mIconSize;
+        mOwlBaseTextSize = getTextSize();
+        applyOwlStyle();
 
         mRunningAppIndicatorHeight =
                 getResources().getDimensionPixelSize(R.dimen.taskbar_running_app_indicator_height);
@@ -438,7 +445,27 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver,
     }
 
     @UiThread
+    /** Owl: per-area icon scale, label scale, and label colour from settings. */
+    private void applyOwlStyle() {
+        if (mDisplay != DISPLAY_WORKSPACE && mDisplay != DISPLAY_ALL_APPS
+                && mDisplay != DISPLAY_FOLDER) {
+            return;
+        }
+        String area = mDisplay == DISPLAY_ALL_APPS ? "drawer" : (mOwlDock ? "dock" : "home");
+        android.content.Context c = getContext();
+        mIconSize = Math.round(mOwlBaseIconSize
+                * com.android.launcher3.owl.OwlAppearance.INSTANCE.iconScale(c, area));
+        setTextSize(TypedValue.COMPLEX_UNIT_PX, mOwlBaseTextSize
+                * com.android.launcher3.owl.OwlAppearance.INSTANCE.labelScale(c, area));
+        int color = com.android.launcher3.owl.OwlAppearance.INSTANCE.labelColor(c, area);
+        if (color != 0) {
+            setTextColor(color);
+        }
+    }
+
     public void applyFromWorkspaceItem(WorkspaceItemInfo info) {
+        mOwlDock = info.container == com.android.launcher3.LauncherSettings.Favorites.CONTAINER_HOTSEAT;
+        applyOwlStyle();
         applyIconAndLabel(info);
         setItemInfo(info);
 
@@ -448,6 +475,8 @@ public class BubbleTextView extends TextView implements ItemInfoUpdateReceiver,
 
     @UiThread
     public void applyFromApplicationInfo(AppInfo info) {
+        mOwlDock = false;
+        applyOwlStyle();
         applyIconAndLabel(info);
         setItemInfo(info);
 
