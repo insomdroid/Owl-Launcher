@@ -20,6 +20,7 @@ class OwlDotGridView @JvmOverloads constructor(
     private val pitch = 40f * resources.displayMetrics.density
     private val radius = 1f * resources.displayMetrics.density
     private var dotColor = 0x40FFFFFF
+    private var bgColor = 0xFF000000.toInt()
 
     init {
         setWillNotDraw(false)
@@ -29,8 +30,9 @@ class OwlDotGridView @JvmOverloads constructor(
     }
 
     private fun refreshColor() {
-        val display = OwlTokens.current(context).display
-        dotColor = (display and 0x00FFFFFF) or (0x40 shl 24)
+        val palette = OwlTokens.current(context)
+        bgColor = palette.bg
+        dotColor = (palette.display and 0x00FFFFFF) or (0x40 shl 24)
     }
 
     override fun onAttachedToWindow() {
@@ -41,6 +43,8 @@ class OwlDotGridView @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        // Opaque Owl background, so the theme is visible regardless of the system wallpaper.
+        canvas.drawColor(bgColor)
         paint.color = dotColor
         var y = pitch / 2f
         while (y < height) {

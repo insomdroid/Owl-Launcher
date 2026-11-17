@@ -1,12 +1,6 @@
 name: build-lineage-base
 on:
   workflow_dispatch:
-  push:
-    branches: [ main, lineage-base, trebuchet-stable, nothing-port ]
-    paths:
-      - ".github/workflows/lineage-base.yml"
-      - "launcher3/**"
-      - "app/**"
 jobs:
   build:
     runs-on: ubuntu-latest

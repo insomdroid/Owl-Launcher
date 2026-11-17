@@ -20,7 +20,7 @@ See [docs/DESIGN.md](docs/DESIGN.md). The visual reference is [vibe-nothing-ui-d
 
 ## Features
 
-- **Theme:** System, Light, Dark, or AMOLED (Settings → Owl theme). Takes effect after the launcher is reopened.
+- **Theme:** System, Light, Dark, or AMOLED (Settings → Owl theme; tap to cycle). Takes effect after the launcher is reopened.
 - **Typography:** Doto (dot display), Geist (UI), Geist Mono (app labels). All fonts are SIL OFL 1.1, see `docs/fonts/OFL/`.
 - **Home screen:** sparse dot-grid background and a dot-matrix clock (HH:mm). The clock redraws once per minute and stops while not visible.
 - **Icons:** monochrome themed icons by default in All Apps, with a transparent background and a black (Light) or white (Dark) glyph.
@@ -43,7 +43,7 @@ gradle :app:assembleDebug
 
 Requires Java 17, Gradle 8.10, and Android SDK platform 36 with build-tools 36.0.0.
 
-A successful build only proves that the code compiles. Behavior and appearance must be checked on a device.
+Builds run only on manual trigger (`workflow_dispatch`), not on every push. A successful build only proves that the code compiles. Behavior and appearance must be checked on a device.
 
 ## Status
 

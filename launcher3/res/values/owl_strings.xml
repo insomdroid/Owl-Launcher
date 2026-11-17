@@ -1,17 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="owl_theme_title">Owl theme</string>
-    <string name="owl_theme_summary">System, Light, Dark, or AMOLED. Takes effect after reopening the launcher.</string>
-    <string-array name="owl_theme_entries">
-        <item>System</item>
-        <item>Light</item>
-        <item>Dark</item>
-        <item>AMOLED</item>
-    </string-array>
-    <string-array name="owl_theme_values">
-        <item>system</item>
-        <item>light</item>
-        <item>dark</item>
-        <item>amoled</item>
-    </string-array>
 </resources>

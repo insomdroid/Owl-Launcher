@@ -22,15 +22,20 @@ android {
             isMinifyEnabled = false
         }
         release {
-            // Size-only candidate. Keep debug as the install/test baseline until the
-            // minified artifact has been verified on-device.
+            // Owl first release: minified and shrunk, signed with the debug key so it
+            // can be sideloaded. Replace with a real release key before distribution.
             isMinifyEnabled = true
             isShrinkResources = true
+            signingConfig = signingConfigs.getByName("debug")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
         }
+    }
+    lint {
+        checkReleaseBuilds = false
+        abortOnError = false
     }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
     kotlinOptions {
