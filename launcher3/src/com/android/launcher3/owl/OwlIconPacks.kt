@@ -63,7 +63,8 @@ object OwlIconPacks {
         val xmlId = res.getIdentifier("appfilter", "xml", packContext.packageName)
         if (xmlId == 0) return emptyMap()
         val map = HashMap<ComponentName, String>()
-        res.getXml(xmlId).use { parser ->
+        val parser = res.getXml(xmlId)
+        try {
             var event = parser.eventType
             while (event != XmlPullParser.END_DOCUMENT) {
                 if (event == XmlPullParser.START_TAG && parser.name == "item") {
@@ -72,11 +73,14 @@ object OwlIconPacks {
                     if (component != null && drawable != null) {
                         // Format: ComponentInfo{package/class}
                         val inner = component.removePrefix("ComponentInfo{").removeSuffix("}")
-                        ComponentName.unflattenFromString(inner)?.let { map[it] = drawable }
+                        val name: ComponentName? = ComponentName.unflattenFromString(inner)
+                        if (name != null) map[name] = drawable
                     }
                 }
                 event = parser.next()
             }
+        } finally {
+            parser.close()
         }
         return map
     }

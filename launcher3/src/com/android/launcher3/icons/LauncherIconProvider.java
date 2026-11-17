@@ -66,7 +66,7 @@ public class LauncherIconProvider extends IconProvider {
     @Override
     public Drawable getIcon(ComponentInfo info, int iconDpi) {
         Drawable fromPack = com.android.launcher3.owl.OwlIconPacks.INSTANCE.iconFor(
-                mContext, info.getComponentName(), iconDpi);
+                mContext, new android.content.ComponentName(info.packageName, info.name), iconDpi);
         return fromPack != null ? fromPack : super.getIcon(info, iconDpi);
     }
 
