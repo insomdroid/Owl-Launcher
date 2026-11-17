@@ -188,6 +188,12 @@ public class ScrimView extends View implements Insettable {
      */
     public void setScrimColors(ScrimColors scrimColors) {
         this.setBackgroundColor(scrimColors.getBackgroundColor());
+        // Owl: drawer background opacity from settings, applied as the drawable's alpha so the
+        // stored colour (used by getScrimColors during transitions) is not reduced again.
+        int percent = com.android.launcher3.LauncherPrefs.DRAWER_BG_OPACITY.get(getContext());
+        if (getBackground() != null) {
+            getBackground().setAlpha(Math.round(255f * percent / 100f));
+        }
         setForeground(new ColorDrawable(scrimColors.getForegroundColor()));
     }
 

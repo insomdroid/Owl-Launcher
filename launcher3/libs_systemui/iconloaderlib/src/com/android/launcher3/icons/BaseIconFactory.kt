@@ -456,7 +456,8 @@ constructor(
     }
 
     companion object {
-        private const val DEFAULT_WRAPPER_BACKGROUND = Color.WHITE
+        // Owl: no box behind legacy icons; the icon itself is the only thing drawn.
+        private const val DEFAULT_WRAPPER_BACKGROUND = Color.TRANSPARENT
 
         // Ratio of icon visible area to full icon size for a square shaped icon
         private const val MAX_SQUARE_AREA_FACTOR = 375.0 / 576
